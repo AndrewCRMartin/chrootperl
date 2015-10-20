@@ -45,6 +45,10 @@ Run the program in the same way that you would run perl on the command line:
 Remember that the perl script can only see within your sandbox, so any
 files you need must be copied into the sandbox first.
 
+*NOTE:* The script will remain in the `$SANDBOX/run` directory. You
+ will need to delete it manually.
+
+
 Tests
 -----
 

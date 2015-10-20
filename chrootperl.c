@@ -68,17 +68,6 @@
 #error "SANDBOX must be defined with -D during compilation!"
 #endif
 
-#define ERR_CMDLINE       1
-#define ERR_NOFILE        2
-#define ERR_SYNTAX        3
-#define ERR_EXEC          4
-#define ERR_CHDIR         5
-#define ERR_USER          6
-#define ERR_NOPARAM       7
-#define ERR_NOROOT        8
-#define ERR_NOWEBUSER     9
-#define ERR_NOABYSISUSER 10
-
 /************************************************************************/
 /* Globals
 */
@@ -115,7 +104,6 @@ int main(int argc, char **argv, char **env)
 
    /* Copy the Perl script into the sandbox                             */
    CopyPerlScript(argv[1], SANDBOX);
-
    RunPerlScript(SANDBOX, argc, argv, env);
 
    return(0);
