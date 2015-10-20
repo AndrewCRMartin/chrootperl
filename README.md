@@ -13,11 +13,11 @@ Edit the `chrootperl.cfg` file as required. This allows you to specify:
 
 - the directory you wish to use for your sandbox (`$SANDBOX`)
 - any additional executables that you need to be able to run - they
-  will all be placed in `$SANDBOX/bin`. bash and perl will be automatically
-  available (`$EXES`)
+  will all be placed in `$SANDBOX/bin`. `bash` and `perl` will be 
+  automatically available (`$EXES`)
 - and additional directories that you will need to run your Perl script.
-  /bin, /lib and /lib64 will be automatically available as well as /run
-  which is used to store the Perl script (`$DIRS`)
+  `/bin`, `/lib` and `/lib64` will be automatically available as well 
+  as `/run` which is used to store the Perl script (`$DIRS`)
 
 Now run the `makesandbox.pl` script:
 
@@ -45,7 +45,7 @@ Run the program in the same way that you would run perl on the command line:
 Remember that the perl script can only see within your sandbox, so any
 files you need must be copied into the sandbox first.
 
-*NOTE:* The script will remain in the `$SANDBOX/run` directory. You
+**NOTE:** The script will remain in the `$SANDBOX/run` directory. You
  will need to delete it manually.
 
 
@@ -71,8 +71,8 @@ what executables you have installed, results will be something like:
 
 ### Test 2
 
-   cd test
-   ./runtest2.sh
+    cd test
+    ./runtest2.sh
 
 This copies the file test2.dat into `$SANDBOX/tmp` and then runs the perl script `test2.pl` in the sandbox, passing it `/tmp/test2.dat` as a parameter. The script simply prints the contents of the file specified on the command line so the results should be the same as the contents of test2.dat:
 
