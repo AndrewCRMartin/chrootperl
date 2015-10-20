@@ -118,7 +118,6 @@ int main(int argc, char **argv, char **env)
 
    RunPerlScript(SANDBOX, argc, argv, env);
 
-
    return(0);
 }
 
@@ -203,6 +202,7 @@ int CheckCommandLine(int argc, char **argv)
    Runs a perl script in a chroot environment
    argv[0] (the name of this program) is replaced by 'perl'
    argv[1] (the name of the perl script) has '/run/' prepended to it
+           (and any existing path stripped)
 
 -  20.10.15 Original   By: ACRM
 */
@@ -210,10 +210,20 @@ int RunPerlScript(char *sandbox, int argc, char **argv, char **env)
 {
    int retval = 0;
    const char *m;
-   char cmd[MAXBUFF];
+   char cmd[MAXBUFF],
+       *chp;
 
+   /* Replace the chrootperl name with 'perl'                           */
    argv[0] = "perl";
-   sprintf(cmd, "/run/%s", argv[1]);
+
+   /* Strip the path from the perl script name if present               */
+   if((chp=strrchr(argv[1], '/'))==NULL)
+      chp = argv[1];
+   else
+      chp++;
+   
+   /* Replace the name of the perl script with the one in sandbox/run   */
+   sprintf(cmd, "/run/%s", chp);
    argv[1] = cmd;
 
 #ifdef DEBUG

@@ -8,7 +8,7 @@ ifeq ($(CHECKSB),X)
 $(error Run with 'make SANDBOX=$$SANDBOX' or 'source ./chrootperl.cfg; make' ***)
 endif
 
-all : chrootperl mychroot
+all : chrootperl
 
 chrootperl : chrootperl.c
 	$(CC) $(COPTS) -DSANDBOX=\"$(SANDBOX)\" -o $@ $<
