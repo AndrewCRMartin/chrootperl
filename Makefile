@@ -1,4 +1,3 @@
-DEST=/usr/local/bin
 CC=gcc
 COPTS=-ansi -pedantic -Wall
 #COPTS=-ansi -pedantic -Wall -DDEBUG -g
@@ -7,6 +6,11 @@ COPTS=-ansi -pedantic -Wall
 CHECKSB=X$(SANDBOX)
 ifeq ($(CHECKSB),X) 
 $(error Run with 'make SANDBOX=$$SANDBOX' or 'source ./chrootperl.cfg; make' ***)
+endif
+
+CHECKDEST=X$(DEST)
+ifeq ($(CHECKDEST),X) 
+$(error Run with 'make DEST=$$DEST' or 'source ./chrootperl.cfg; make' ***)
 endif
 
 all : chrootperl
