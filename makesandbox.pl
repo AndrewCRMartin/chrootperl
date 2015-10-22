@@ -120,6 +120,10 @@ sub MakeDirectories
             Die("Could not create sandbox directory: $sandbox/$dir"); 
         }
     }
+
+    # Set the permissions on the run directory to ensure the web user can
+    # copy files in there
+    `chmod a+w $sandbox/run`;
 }
 
 #*************************************************************************
