@@ -12,11 +12,16 @@ if($tfile eq '')
     ErrorDie("Can't write temporary file");
 }
 
+if('%%DEST%%' eq '')
+{
+    ErrorDie("You must define the DEST environment variable to give the location of the chrootperl executable");
+}
+
 #my $infile = "/data/tmp/sandbox/tmp/test2.dat";
 #my $infile = "/localhome/localuser/sandbox/tmp/test2.dat";
 #my $result = `perl $tfile $infile`;
 my $infile = "/tmp/test2.dat";
-my $result = `/usr/local/bin/chrootperl $tfile $infile`;
+my $result = `%%DEST%%/chrootperl $tfile $infile`;
 
 print $::cgi->header();
 

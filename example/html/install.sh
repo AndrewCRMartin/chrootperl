@@ -13,6 +13,12 @@ then
    exit 1
 fi
 
+if [ "X$DEST" == "X" ]
+then
+   echo "You must define the DEST environment variable to indicate where chrootperl lives"
+   exit 1
+fi
+
 if [ ! -d $dir ]
 then
    mkdir -p $dir
@@ -25,6 +31,9 @@ then
 fi
 
 cp -v *.cgi *.html .htaccess $dir
+
+# Patch in the path to chrootperl
+perl -e "while(<>) {s/%%DEST%%/\$ENV{'DEST'}/g; print;}"  perl.cgi >$dir/perl.cgi
 
 cp test2.dat $SANDBOX/tmp
 

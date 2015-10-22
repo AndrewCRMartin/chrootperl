@@ -11,8 +11,8 @@ Installation
 
 Edit the `chrootperl.cfg` file. 
 
-** You must specify the directory you wish to use for your sandbox
-(`$SANDBOX`) **
+**You must specify the directory you wish to use for your sandbox
+(`$SANDBOX`)**
 
 **Note:** Placing the sandbox in `/tmp` or `/var/tmp` may well not
   work owing to SELinux and advanced permissions.
@@ -25,6 +25,10 @@ The config file also allows you to specify:
 - any additional directories that you will need to run your Perl scripts.
   `/bin`, `/lib` and `/lib64` will be automatically available as well 
   as `/run` which is used to store the Perl script (`$DIRS`)
+- the destination where the `chrootperl` executable will live. By
+  default this is `/usr/local/bin`, but you must ensure that if this
+  is and NFS export that it is exported with `NO_ROOT_SQUASH` on the
+  machines on which you wish to use the program. (`$DEST`)
 
 Now run the `makesandbox.pl` script:
 
