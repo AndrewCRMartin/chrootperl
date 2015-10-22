@@ -1,0 +1,254 @@
+<html>
+<head><title>Perl interpreter</title></head>
+<body>
+
+<h1>An introduction to using Perl in Bioinformatics</h1>
+
+<h2>What is Perl?</h2>
+
+<p>Perl stands for 'Practical Extraction and Reporting Language'. It
+is designed as a powerful scripting language making it easy and fast
+  to implement programs. In particular it is very good at manipulating
+  data in files - extracting and reformatting data. It has built in
+  functions that make it easy to read lines from a file, split them
+  into columns, and to match patterns or 'regular expressions'</p>
+
+<p>Perl is itself a program known as an 'interpreter'. It reads the
+  Perl script that you write, interprets the commands that you have
+  given and runs them on any data files that you have provided. The
+  Perl interpreter is already installed if you are using a Linux
+  machine or a Mac - you access it by opening a command line prompt
+  (or 'terminal'). If you are using Windows, then you can download and
+  install versions of Perl such
+  as <a href='http://www.activestate.com/activeperl'>ActivePerl</a> or
+  <a href='http://strawberryperl.com/'>Strawberry Perl</a> which can
+  be used in the same way. (Even better, stop using Windows and
+  install Linux instead!) </p>
+
+<p>To write a Perl script, one normally uses a 'text editor' to create
+  the script. A text editor is a program a biut like a word processor,
+  but it doesn't do anything fancy like different fonts, text size,
+  colours, etc. It simply allows one to create a plain text
+  file. You <emph>could</emph> use Word to do that (and select 'Save
+  As Plain text'), but it isn't recommended. Under Windows, you can
+  use something like 'notepad', but there are better editors available
+  such
+  as <a href='https://notepad-plus-plus.org/'>NotePad++</a>,
+  <a href='http://www.ssesetup.com/textmorph.html'>TextMorph</a>,
+  <a href='http://www.pspad.com/en/'>PSPad</a>,
+  <a href='http://jedit.org/'>JEdit</a>,
+  <a href='https://wiki.gnome.org/Apps/Gedit'>gEdit</a> or
+  <a href='http://ftp.gnu.org/gnu/emacs/windows/emacs-22.3-bin-i386.zip'>emacs</a>.
+  Many of these are also available for Mac and Linux. Emacs is the
+  most powerful editor and can do pretty much anything, but may be a
+  little harder to learn to use.</p>
+
+<p>Once you have created your program as a text file, you then run it
+  through the Perl interpreter and pass any other files or commands
+  to the script on the command line. Perl scripts do not (usually) have
+  graphical interfaces, so you need to get used to using the command
+  line!</p>
+
+<p>In this practical, we have created a simple way for you to enter a
+  Perl script via a web page and run it over the web. This is purely
+  for this teaching exercise. Once you have learned the basics this
+  way, you should use a version of Perl installed on your own
+  machine.</p>
+
+<h2>Reading a file</h2>
+<p>We are going to start with a very simple program that reads the
+  contents of a file and prints it to the screen. The file you are
+  going to look at is a PDB file containing the structure of a protein.</p>
+
+<p>Perl provide a very simple way of accessing a file - you simply
+  provide the name of the file on the command line after the name of
+  the perl script. Something like:</p>
+
+<pre>
+   perl myscript.pl myfile.dat
+</pre>
+
+<p>The Perl scripting language itself provides a simple way of looping through the lines
+  contained in the file. In your Perl script, you simply do:</p>
+
+<pre>
+   while(&lt;&gt;)
+   {
+      # Do something here
+   }
+</pre>
+
+<p>The <samp>while()</samp> control statment means 'while something
+  (contained in the parentheses) is true do whatever is between the
+  curly brackets'.</p>
+
+<p>In this case the condition (the thing that has to be true) is
+  written as &lt;&gt;. This is a bit of Perl shorthand magic that says
+  'read a line from the file specified on the command line'.</p>
+
+<p>The thing between the curly brackets in this case is introduced
+  with a # - this introduces a comment. It doesn't do anything at all,
+  but helps explain what your code is doing - it just makes things
+  more readable.</p>
+
+<p>So if we introduce just one more command, we will have a Perl
+  script that can read a file and print its contents to the
+  screen. That command is <samp>print</samp>. In Perl we put a
+  semi-colon (<samp>;</samp>) after a command to indicate the end of one
+  command and separate if from the next command.</p>
+   
+<p>So here is our complete piece of code. Click the 'Run' button to
+  see the results.</p>
+
+<form action='perl.cgi' method='post'>
+<textarea cols='80' rows='20' name='script'>
+while(<>)
+{
+    print;
+}
+</textarea>
+<input type='submit' text='Run' />
+</form>
+
+<h2>PDB Files</h2>
+
+<p>The file that you have looked at is a PDB file. Here is a small
+  snippet of the file:</p>
+
+<pre>
+ATOM      9  N   ASP L   1      17.203 -13.024  34.883  1.00 38.78           N  
+ATOM     10  CA  ASP L   1      16.553 -12.738  33.612  1.00 34.98           C  
+ATOM     11  C   ASP L   1      15.132 -13.283  33.573  1.00 31.72           C  
+ATOM     12  O   ASP L   1      14.927 -14.498  33.516  1.00 30.05           O  
+ATOM     13  CB  ASP L   1      17.376 -13.328  32.457  1.00 35.50           C  
+ATOM     14  CG  ASP L   1      16.627 -13.314  31.129  1.00 37.37           C  
+ATOM     15  OD1 ASP L   1      15.926 -12.321  30.839  1.00 34.69           O  
+ATOM     16  OD2 ASP L   1      16.754 -14.296  30.362  1.00 35.49           O  
+ATOM     17  N   ILE L   2      14.151 -12.385  33.618  1.00 27.04           N  
+ATOM     18  CA  ILE L   2      12.755 -12.798  33.565  1.00 24.06           C  
+ATOM     19  C   ILE L   2      12.335 -12.897  32.106  1.00 23.36           C  
+ATOM     20  O   ILE L   2      12.305 -11.898  31.377  1.00 21.75           O  
+ATOM     21  CB  ILE L   2      11.835 -11.799  34.294  1.00 23.42           C  
+ATOM     22  CG1 ILE L   2      12.257 -11.685  35.767  1.00 24.39           C  
+ATOM     23  CG2 ILE L   2      10.384 -12.263  34.194  1.00 22.99           C  
+ATOM     24  CD1 ILE L   2      11.437 -10.700  36.576  1.00 23.75           C  
+</pre>
+
+<p>For the purposes of this exercise, you can assume that the file
+  contains 12 columns, each of which is separated by a space.</p>
+
+<p>The first column is simply a label that tells us what sort of data
+  are in this line or 'record' in the file. I've edited the file down
+  so that we only have the 'ATOM' records which represent the
+  coordinates of the protein - the full file has various
+  header information as well 'HETATM' records that represent
+  non-protein atoms such as waters.</p>
+
+<p>The second column is a record number - it is simply a unique number
+  for each ATOM record.</p>
+
+<p>The third column is the atom type indicating its position within an
+  amino acid</p>
+
+<p>The fourth column is the amino acid type.</p>
+<p>The fifth column is the chain label - PDB files can contain
+  quaternary structure, or complexes between proteins or simply
+  multiple copies of the same protein. Each protein chain is given a
+  different chain label.</p>
+<p>The sixth column is the amino acid number counting from the
+  N-terminus of each chain. These numbers can be zero or even
+  negative and in some cases can have a letter following the numbers.</p>
+<p>The seventh, eighth and ninth columns represent the x,y,z
+  coordinates of the atom</p>
+<p>The tenth column is the occupancy. This is normally 1.0, but in
+  some cases, an atom can be flipping between two (or more) different
+  distinct positions. This is indicated by having multiple records
+  for the atom with the occupancy indicating the fraction of time
+  that the atom spends at that position.</p>
+<p>The eleventh column is the 'temperature factor' or 'B-value'. This
+  indiates the amount of thermal motion that the atom has - in other
+  words how much it is vibrating about the indicated position.</p>
+<p>The twelfth column represents the element type.</p>
+
+<h2>Scalar variables</h2>
+
+<p>Let's modify our program so that instead of printing the contents
+  of the file, we count the number of lines in the file. To do this we
+  need to have what is known as a 'scalar variable'. A bit like in
+  algebra this is a way of storing a number or a string (a set of
+  characters) in a 'variable'. We introduce scalar variables with
+  a <samp>$</samp>, so we can say something like:</p>
+
+<pre>
+   $total = 0;
+</pre>
+
+<p>Note that the equals sign is used for assignment. The statement
+  means 'set the variable <samp>$total</samp> to the value zero.<p>
+
+<p>Remembering that the equals sign is used for assignment not for
+  equality as it is in algebra, we can also say things like:</p>
+
+<pre>
+   $total = $total + 1;
+</pre>
+
+<p>This will increment the value of <samp>$total</samp> i.e. set it to
+  one more than it was previously. In fact this is such a common thing
+  to do that there is a special syntax for doing it:</p>
+
+<pre>
+   $total++;
+</pre>
+
+<p>Clearly we can exploit this to count the lines in a file. </p>
+
+<form action='perl.cgi' method='post'>
+<textarea cols='80' rows='20' name='script'>
+$total = 0;
+while(<>)
+{
+    $total++;
+}
+print "There were $total lines\n";
+</textarea>
+<input type='submit' text='Run' />
+</form>
+
+
+
+
+
+
+
+<h2>Columns and arrays</h2>
+
+<p> Perl lets you split a line into columns very easily. We can simply
+  say:</p>
+
+<pre>
+   @columns = split;
+</pre>
+
+<p><samp>@columns</samp> is known as an 'array' - its a group of items
+  that can be accessed with an index (i.e. a number that represents a
+  slot in the array). Think of it as the name of a road of houses -
+  you can access the person who lives in a particular house by
+  specifying the road name and the house number. The main difference
+  is that, in Perl, arrays indices count from zero rather than
+  one.</p>
+
+<p>So, in this example, we could access the first column
+  using <samp>$columns[0]</samp>, the second column
+  with <samp>$columns[1]</samp>, etc. Notice here that we didn't use
+  an <samp>@</samp> in front of the name of the array; instead we used
+  a <samp>$</samp>. What does this mean? The <samp>@</samp> sign is
+  used to refer to the whole array. The <samp>$</samp> is used to
+  refer to a single 'slot' in the array because this single slot is
+  not an array, it is a 'scalar' variable.</p>
+
+
+
+
+</body>
+

@@ -3,6 +3,9 @@ Examples
 
 This directory contains some examples of how chrootperl might be used.
 
+html
+----
+
 The `html` directory contains a simple web page and CGI script that
 allows a user to write a Perl script via an HTML form and run that
 script. This would normally have huge security implications
@@ -25,4 +28,12 @@ endhostent(), gethostbyaddr(), gethostbyname(), gethostent(),
 sethostent(), endservent(), getservbyname(), getservbyport(),
 getservent(), setservent(), endprotoent(), getprotobyname(),
 getprotobynumber(), getprotoent(), setprotoent(), etc.
+
+
+html2
+-----
+
+The `html2` directory builds on this providing a more extensive web
+page designed as a very simple tutorial introduction to the basics of
+Perl programming.
 
