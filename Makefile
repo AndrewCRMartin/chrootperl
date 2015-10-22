@@ -1,3 +1,4 @@
+DEST=/usr/local/bin
 CC=gcc
 COPTS=-ansi -pedantic -Wall
 #COPTS=-ansi -pedantic -Wall -DDEBUG -g
@@ -17,3 +18,12 @@ chrootperl : chrootperl.c
 
 clean :
 	\rm -f chrootperl
+
+distclean : clean
+
+
+
+install :
+	sudo \cp -v chrootperl $(DEST)
+	sudo chown root $(DEST)/chrootperl
+	sudo chmod u+s  $(DEST)/chrootperl

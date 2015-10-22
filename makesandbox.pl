@@ -1,4 +1,4 @@
-#!/usr/bin/perl
+#!/usr/bin/perl -s
 #*************************************************************************
 #
 #   Program:    makesandbox
@@ -60,10 +60,15 @@ use config;
 my %config = config::ReadConfig('chrootperl.cfg');
 
 # Collect config values
-my $sandbox = $config{'SANDBOX'};
-my $user    = $config{'USER'};
+my $sandbox = defined($::sandbox)?$::sandbox:$config{'SANDBOX'};
 my $dirs    = $config{'DIRS'};
 my @exes    = ParseExes($config{'EXES'});
+
+# Check sandbox has been defined
+if($sandbox eq '')
+{
+    Die("You must edit chrootperl.cfg to specify where to install the sandbox");
+}
 
 # Add essential executables
 push @exes, '/bin/bash';
@@ -90,18 +95,44 @@ sub ParseExes
 # Create directories for the sandbox
 #
 # 20.10.15 Original   By: ACRM
+# 21.10.15 Checks directories have been created
 sub MakeDirectories
 {
-    my($sandbox, $dirs) = @_;
-    my $alldirs = "bin,lib64,lib,run"; # Essential directories
-    if(length($dirs))                  # Append any other directories
+    my($sandbox, $dirList) = @_;
+    my $allDirs = "bin,lib64,lib,run"; # Essential directories
+    if(length($dirList))               # Append any other directories
     {
-        $alldirs .= ",$dirs";
+        $allDirs .= ",$dirList";
     }
 
     # Create the directories
     `mkdir -p $sandbox`;
-    `mkdir -p $sandbox/{$alldirs}`;
+    # Check it's been created
+    Die("Could not create sandbox directory: $sandbox") if(! -d $sandbox);
+
+    `mkdir -p $sandbox/{$allDirs}`;
+    # Check that they've been created
+    my @dirs = split(/\,/, $allDirs);
+    foreach my $dir (@dirs)
+    {
+        if(! -d "$sandbox/$dir")
+        {
+            Die("Could not create sandbox directory: $sandbox/$dir"); 
+        }
+    }
+}
+
+#*************************************************************************
+#>sub Die($msg)
+# -------------
+# Die with a message
+#
+# 21.10.15 Original   By: ACRM
+sub Die
+{
+    my($msg) = @_;
+    printf STDERR "Error (makesandbox): $msg\n";
+    exit 1;
 }
 
 #*************************************************************************

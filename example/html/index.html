@@ -2,9 +2,42 @@
 <head><title>Perl interpreter</title></head>
 <body>
 
+<h1>chrootperl demo</h1>
+
+<h2>Reading a file</h2>
+<p>This demo uses a CGI script that takes the perl script you write
+  here and runs it through chrootperl with a file passed on the
+  command line that contains:</p>
+<pre>
+one
+two
+three
+four
+five
+</pre>
+
 <form action='perl.cgi' method='post'>
-<textarea cols='80' rows='20' name='script'></textarea>
+<textarea cols='80' rows='20' name='script'>
+while(<>)
+{
+    print;
+}
+</textarea>
 <input type='submit' />
 </form>
+
+<h2>Proving we are in our chroot directory</h2>
+<p>This demo simply lists the contents of /usr/bin to prove we are in
+  our chroot'd sandbox and not in the normal filesystem:</p>
+
+<form action='perl.cgi' method='post'>
+<textarea cols='80' rows='20' name='script'>
+print `ls /bin`;
+</textarea>
+<input type='submit' />
+</form>
+
+
+
 </body>
 

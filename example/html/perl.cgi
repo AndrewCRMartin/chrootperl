@@ -13,9 +13,10 @@ if($tfile eq '')
 }
 
 #my $infile = "/data/tmp/sandbox/tmp/test2.dat";
+#my $infile = "/localhome/localuser/sandbox/tmp/test2.dat";
 #my $result = `perl $tfile $infile`;
 my $infile = "/tmp/test2.dat";
-my $result = `/home/amartin/git/chrootperl/chrootperl $tfile $infile`;
+my $result = `/usr/local/bin/chrootperl $tfile $infile`;
 
 print $::cgi->header();
 
