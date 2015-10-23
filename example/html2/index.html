@@ -1,5 +1,13 @@
 <html>
-<head><title>Perl interpreter</title></head>
+<head><title>Perl interpreter</title>
+<style type='text/css'>
+pre, samp {background: #DDDDDD;
+      border: 1pt solid #CCCCCC;
+      border-radius: 5pt;
+      padding: 1pt;
+}
+</style>
+</head>
 <body>
 
 <h1>An introduction to using Perl in Bioinformatics</h1>
@@ -134,41 +142,47 @@ ATOM     23  CG2 ILE L   2      10.384 -12.263  34.194  1.00 22.99           C
 ATOM     24  CD1 ILE L   2      11.437 -10.700  36.576  1.00 23.75           C  
 </pre>
 
+<p>Note that a PDB file resulting from x-ray crystallography does not
+  normally contain the positions of the hydrogen atoms, since these
+  can't usually be seen in the structure.</p>
+
 <p>For the purposes of this exercise, you can assume that the file
   contains 12 columns, each of which is separated by a space.</p>
 
-<p>The first column is simply a label that tells us what sort of data
+<ul>
+<li>The first column is simply a label that tells us what sort of data
   are in this line or 'record' in the file. I've edited the file down
   so that we only have the 'ATOM' records which represent the
   coordinates of the protein - the full file has various
   header information as well 'HETATM' records that represent
-  non-protein atoms such as waters.</p>
+  non-protein atoms such as waters.</li>
 
-<p>The second column is a record number - it is simply a unique number
-  for each ATOM record.</p>
+<li>The second column is a record number - it is simply a unique number
+  for each ATOM record.</li>
 
-<p>The third column is the atom type indicating its position within an
-  amino acid</p>
+<li>The third column is the atom type indicating its position within an
+  amino acid</li>
 
-<p>The fourth column is the amino acid type.</p>
-<p>The fifth column is the chain label - PDB files can contain
+<li>The fourth column is the amino acid type.</li>
+<li>The fifth column is the chain label - PDB files can contain
   quaternary structure, or complexes between proteins or simply
   multiple copies of the same protein. Each protein chain is given a
-  different chain label.</p>
-<p>The sixth column is the amino acid number counting from the
+  different chain label.</li>
+<li>The sixth column is the amino acid number counting from the
   N-terminus of each chain. These numbers can be zero or even
-  negative and in some cases can have a letter following the numbers.</p>
-<p>The seventh, eighth and ninth columns represent the x,y,z
-  coordinates of the atom</p>
-<p>The tenth column is the occupancy. This is normally 1.0, but in
+  negative and in some cases can have a letter following the numbers.</li>
+<li>The seventh, eighth and ninth columns represent the x,y,z
+  coordinates of the atom</li>
+<li>The tenth column is the occupancy. This is normally 1.0, but in
   some cases, an atom can be flipping between two (or more) different
   distinct positions. This is indicated by having multiple records
   for the atom with the occupancy indicating the fraction of time
-  that the atom spends at that position.</p>
-<p>The eleventh column is the 'temperature factor' or 'B-value'. This
+  that the atom spends at that position.</li>
+<li>The eleventh column is the 'temperature factor' or 'B-value'. This
   indiates the amount of thermal motion that the atom has - in other
-  words how much it is vibrating about the indicated position.</p>
-<p>The twelfth column represents the element type.</p>
+  words how much it is vibrating about the indicated position.</li>
+<li>The twelfth column represents the element type.</li>
+</ul>
 
 <h2>Scalar variables</h2>
 
@@ -183,11 +197,12 @@ ATOM     24  CD1 ILE L   2      11.437 -10.700  36.576  1.00 23.75           C
    $total = 0;
 </pre>
 
-<p>Note that the equals sign is used for assignment. The statement
-  means 'set the variable <samp>$total</samp> to the value zero.<p>
+<p>Note that the equals sign is used for assignment not for equality
+  as it is in algebra. The statement means 'set the
+  variable <samp>$total</samp> to the value zero.<p>
 
-<p>Remembering that the equals sign is used for assignment not for
-  equality as it is in algebra, we can also say things like:</p>
+<p>Since the equals sign is used for assignment not for equality, we
+  can also say things like:</p>
 
 <pre>
    $total = $total + 1;
@@ -195,59 +210,125 @@ ATOM     24  CD1 ILE L   2      11.437 -10.700  36.576  1.00 23.75           C
 
 <p>This will increment the value of <samp>$total</samp> i.e. set it to
   one more than it was previously. In fact this is such a common thing
-  to do that there is a special syntax for doing it:</p>
+  to do that there is a special shorthand syntax for doing it:</p>
 
 <pre>
    $total++;
 </pre>
 
-<p>Clearly we can exploit this to count the lines in a file. </p>
+<p>One other piece of information. You can print things other than the
+  current line (which we did simply with <samp>print;</samp>) such as
+  pieces of text and the contents of scalar variables, by putting them
+  in double-inverted commas, like this:</p>
+
+<pre>
+   print "The total was: $total\n";
+</pre>
+
+<p>The funny <samp>\n</samp> at the end inserts a return character to
+  end the printed line.</p>
+
+<p>Clearly we can exploit all this to count the lines in a file. You now
+  know everything you need:</p>
+<ul>
+<li>Use a variable to count the lines</li>
+<li>Start by initializing the variable to zero</li>
+<li>Loop through the file
+  using <samp>while(<>){&nbsp;&nbsp;}</samp></li>
+<li>For each iteration of the loop, increment the variable</li>
+<li>After the loop has finished, print the number of lines</li>
+</ul>
+
+<p>Give it a go! The answer should be 4253</p>
 
 <form action='perl.cgi' method='post'>
 <textarea cols='80' rows='20' name='script'>
+</textarea>
+<input type='submit' text='Run' />
+</form>
+
+<!--
+<pre>
 $total = 0;
 while(<>)
 {
     $total++;
 }
 print "There were $total lines\n";
-</textarea>
-<input type='submit' text='Run' />
-</form>
-
-
-
-
+</pre>
+-->
 
 
 
 <h2>Columns and arrays</h2>
 
-<p> Perl lets you split a line into columns very easily. We can simply
-  say:</p>
+<p>The PDB format has already been described and, for the purpose of
+  this exercise, can be considerd as a set of columns. Perl lets you
+  split a line into columns very easily. We can simply say:</p>
 
 <pre>
    @columns = split;
 </pre>
 
-<p><samp>@columns</samp> is known as an 'array' - its a group of items
+<p><samp>@columns</samp> is known as an 'array' - it's a group of items
   that can be accessed with an index (i.e. a number that represents a
-  slot in the array). Think of it as the name of a road of houses -
+  'slot' in the array). Think of the array as the name of a road of houses -
   you can access the person who lives in a particular house by
   specifying the road name and the house number. The main difference
   is that, in Perl, arrays indices count from zero rather than
   one.</p>
 
-<p>So, in this example, we could access the first column
-  using <samp>$columns[0]</samp>, the second column
-  with <samp>$columns[1]</samp>, etc. Notice here that we didn't use
-  an <samp>@</samp> in front of the name of the array; instead we used
-  a <samp>$</samp>. What does this mean? The <samp>@</samp> sign is
-  used to refer to the whole array. The <samp>$</samp> is used to
-  refer to a single 'slot' in the array because this single slot is
-  not an array, it is a 'scalar' variable.</p>
+<p>If, as in this example, our array is called <samp>@columns</samp>
+  we could access the first column using <samp>$columns[0]</samp>, the
+  second column with <samp>$columns[1]</samp>, etc.</p>
 
+<p> Notice that we refer to a whole array by putting an <samp>@</samp>
+  in front of the name of the array - using the road of houses
+  analogy, this is how we show we are referring to the whole
+  road. However, when we refer to an individual 'slot' in the array we
+  use a <samp>$</samp> in front of the name. This is because the the
+  single slot is not an array. In the road of houses analogy, it is a
+  single house rather than the whole road. Consequently, it is a
+  scalar variable which (as shown previously) starts with
+  a <samp>$</samp>.</p>
 
+<p>We already know how to count the lines in a file - since we know
+  that our data contained coordinates of a protein, this means that we
+  were counting how many atoms were in the protein. Let's change this
+  so we are counting how many amino acids are in the protein.</p>
+
+<p>Every amino acid has a backbone consisting of a nitrogen (N), alpha
+  carbon (CA), carbonyl carbon (C) and carbonyl oxygen (O). The names
+  in parentheses are the labels used in the PDB file to refer to these
+  atoms. As we work out along the side-chain, the positions are
+  indicated using other letters of the Greek alphabet (beta, gamma,
+  etc.) which are translated to their Roman equivalents (beta=B,
+  gamma=G, etc), so an alanine (which just has a CH<sub>3</sub> group
+  attached to the C-alpha), has a C-beta atom (CB in the PDB file).</p> 
+
+<p>Looking at the PDB format, we saw that the atom type is indicated
+  in the third column. If we store the columns in an array
+  called <samp>@columns</samp> then we can access the third column
+  using <samp>$columns[2]</samp></p>
+
+<p>Consequently, since each and every amino acid only has one
+  occurrence of a C-alpha, we could count the number of amino acids,
+  by counting the number of times that 'CA' occurs
+  in <samp>$column[2]</samp>.</p>
+
+<p>Now we need to introduce two new programming concepts.</p>
+
+<ol>
+<li>Just as we had a <samp>while(){}</samp> loop which executed a set of
+  statements (enclosed in the curly brackets) <i>while</i> something
+  was true, we can use an <samp>if(){}</samp> statement to execute
+  some code just once <i>if</i> something is true.</li>
+<li>We can test whether a variable contains a certain string using
+  the <samp>eq</samp> test.</li>
+</ol>
+
+<p>Putting this information together we can test whether we are
+  looking at a C-alpha by doing
 
 
 </body>
