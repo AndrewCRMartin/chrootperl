@@ -64,6 +64,18 @@ files you need must be copied into the sandbox first.
  will need to delete it manually.
 
 
+### If the program doesn't run...
+
+1. Check that the chrootperl program is owned by root 
+   `chown root:root chrootperl`
+
+2. Check that the chrootperl program has the setuid bit set
+   `chmod u+s chrootperl`
+
+3. Check that the filesystem where the chrootperl executable lives
+   either a) is locally mounted or b) is exported over NFS with the
+   `no_root_squash` option set (see `/etc/exports` on the NFS server).
+
 Tests
 -----
 
