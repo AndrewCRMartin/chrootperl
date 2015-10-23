@@ -6,6 +6,7 @@ pre, samp {background: #DDDDDD;
       border-radius: 5pt;
       padding: 1pt;
 }
+pre {padding: 5pt 20pt;}
 </style>
 </head>
 <body>
@@ -73,17 +74,17 @@ is designed as a powerful scripting language making it easy and fast
   the perl script. Something like:</p>
 
 <pre>
-   perl myscript.pl myfile.dat
+perl myscript.pl myfile.dat
 </pre>
 
 <p>The Perl scripting language itself provides a simple way of looping through the lines
   contained in the file. In your Perl script, you simply do:</p>
 
 <pre>
-   while(&lt;&gt;)
-   {
-      # Do something here
-   }
+while(&lt;&gt;)
+{
+   # Do something here
+}
 </pre>
 
 <p>The <samp>while()</samp> control statment means 'while something
@@ -115,7 +116,7 @@ while(<>)
     print;
 }
 </textarea>
-<input type='submit' text='Run' />
+<input type='submit' value='Run' />
 </form>
 
 <h2>PDB Files</h2>
@@ -194,7 +195,7 @@ ATOM     24  CD1 ILE L   2      11.437 -10.700  36.576  1.00 23.75           C
   a <samp>$</samp>, so we can say something like:</p>
 
 <pre>
-   $total = 0;
+$total = 0;
 </pre>
 
 <p>Note that the equals sign is used for assignment not for equality
@@ -205,7 +206,7 @@ ATOM     24  CD1 ILE L   2      11.437 -10.700  36.576  1.00 23.75           C
   can also say things like:</p>
 
 <pre>
-   $total = $total + 1;
+$total = $total + 1;
 </pre>
 
 <p>This will increment the value of <samp>$total</samp> i.e. set it to
@@ -213,7 +214,7 @@ ATOM     24  CD1 ILE L   2      11.437 -10.700  36.576  1.00 23.75           C
   to do that there is a special shorthand syntax for doing it:</p>
 
 <pre>
-   $total++;
+$total++;
 </pre>
 
 <p>One other piece of information. You can print things other than the
@@ -222,7 +223,7 @@ ATOM     24  CD1 ILE L   2      11.437 -10.700  36.576  1.00 23.75           C
   in double-inverted commas, like this:</p>
 
 <pre>
-   print "The total was: $total\n";
+print "The total was: $total\n";
 </pre>
 
 <p>The funny <samp>\n</samp> at the end inserts a return character to
@@ -244,7 +245,7 @@ ATOM     24  CD1 ILE L   2      11.437 -10.700  36.576  1.00 23.75           C
 <form action='perl.cgi' method='post'>
 <textarea cols='80' rows='20' name='script'>
 </textarea>
-<input type='submit' text='Run' />
+<input type='submit' value='Run' />
 </form>
 
 <!--
@@ -267,7 +268,7 @@ print "There were $total lines\n";
   split a line into columns very easily. We can simply say:</p>
 
 <pre>
-   @columns = split;
+@columns = split;
 </pre>
 
 <p><samp>@columns</samp> is known as an 'array' - it's a group of items
@@ -314,7 +315,7 @@ print "There were $total lines\n";
 <p>Consequently, since each and every amino acid only has one
   occurrence of a C-alpha, we could count the number of amino acids,
   by counting the number of times that 'CA' occurs
-  in <samp>$column[2]</samp>.</p>
+  in <samp>$columns[2]</samp>.</p>
 
 <p>Now we need to introduce two new programming concepts.</p>
 
@@ -328,8 +329,246 @@ print "There were $total lines\n";
 </ol>
 
 <p>Putting this information together we can test whether we are
-  looking at a C-alpha by doing
+  looking at a C-alpha by doing:</p>
 
+<pre>
+if($columns[2] eq "CA")
+</pre>
+
+
+<p>Your previous code that counted the total number of atoms should
+  have looked like what is shown below. Modify it to count the number
+  of amino acids. The answer should be 555</p>
+
+<form action='perl.cgi' method='post'>
+<textarea cols='80' rows='20' name='script'>
+$total = 0;
+while(<>)
+{
+    $total++;
+}
+print "There were $total atoms\n";
+</textarea>
+<input type='submit' value='Run' />
+</form>
+
+<!--
+$total = 0;
+while(<>)
+{
+   @columns = split;
+   if($columns[2] eq "CA")
+   {
+      $total++;
+   }
+}
+print "There were $total residues\n";
+-->
+
+<h3>Loops and arrays</h3>
+
+<p>
+You have already seen the <samp>while(){}</samp> loop used to repeat a
+  block of code <i>while</i> something is true (in the cases you have
+  seen, the thing you are testing for truth is whether the file
+  contains something).  Very often we want to do something a specified
+  number of times and we can use the <samp>while(){}</samp> loop for
+  this purpose.  For example, if we wanted to do something 5 times, we
+  could initialize a variable to zero, (e.g. <samp>$count=0;</samp>)
+  start a <samp>while(){}</samp> with the condition that the variable
+  is less than 5 and within the loop we could increment the
+  variable. Give it a try:</p>
+<form action='perl.cgi' method='post'>
+<textarea cols='80' rows='20' name='script'>
+$count = 0;
+while($count &lt; 5)
+{
+   print "Hello\n";
+   $count++;
+}
+</textarea>
+<input type='submit' value='Run' />
+</form>
+
+<p>However, this is something that we need to do so often, that Perl
+  gives us a simpler syntax known as the <samp>for(){}</samp>
+  loop. This allows us to specify an initialization, a condition and
+  an increment in a single line:</p>
+<form action='perl.cgi' method='post'>
+<textarea cols='80' rows='20' name='script'>
+for($count = 0; $count < 5; $count++)
+{
+   print "Hello\n";
+}
+</textarea>
+<input type='submit' value='Run' />
+</form>
+
+<p>Mathematically arrays can be thought of as being like a vector, but
+  in Perl, arrays are rather interchangeable with 'lists'. A list is a
+  set of values separated by commas and enclosed in
+  parentheses. e.g.</p>
+
+<pre>
+(1, 2, 3, 4, 5);
+</pre>
+
+<p>This equivalence allows us to initialize the values in an
+  array. For example:</p>
+
+<pre>
+@words = ("Hello", "World");
+</pre>
+
+<p>We could use a <samp>for(){}</samp> loop to print each of the
+  values in an array. You just need one other piece of information to
+  know how to do that: how to find out how many values are in
+  the array. Perl lets you do that by using the <samp>scalar()</samp>
+  function around the array name. Try this piece of code:</p>
+<form action='perl.cgi' method='post'>
+<textarea cols='80' rows='20' name='script'>
+@words = ("Hello", "World");
+$nWords = scalar(@words);
+print "There were $nWords words\n";
+</textarea>
+<input type='submit' value='Run' />
+</form>
+
+<p>Given the information you have about the <samp>for(){}</samp> loop,
+  and remembering how you access an individual item in an array,
+  modify the above code to print each word in the array on a separate
+  line.</p>
+
+
+<p>Again stepping through the values contained in an array is such a
+  common thing, that Perl provides a special loop syntax for doing
+  it. This is known as the <samp>foreach(){}</samp> loop:</p>
+
+<form action='perl.cgi' method='post'>
+<textarea cols='80' rows='20' name='script'>
+@words = ("Hello", "World");
+foreach $word (@words)
+{
+    print "$word\n";
+}
+</textarea>
+<input type='submit' value='Run' />
+</form>
+
+<ul>
+<li>What happens if you take out the <samp>\n</samp>?</li>
+<li>Modify this code so that you also count how many words were stored
+  in the array and print the answer.</li>
+</ul>
+
+
+
+
+<h2>Hashes</h2>
+<p>We have so far met two ways of storing data:</p>
+
+<p>1. The <b>scalar variable</b>: This is introduced by a <samp>$</samp>
+  and is used to store a single value which can be a number or a
+  string of characters. For instance:
+</p>
+<form action='perl.cgi' method='post'>
+<textarea cols='80' rows='3' name='script'>
+$a = 5;
+$b = "Hello world";
+print "The value of 'a' was $a\n";
+print "'b' says $b\n";
+</textarea>
+<input type='submit' value='Run' />
+</form>
+
+<p>2. The <b>array</b>: This is introduced by an <samp>@</samp> and
+  allows us to store a group of values together under a single label,
+  accessing each one using an index number. Remember that an
+  individual slot in the array (as opposed to the whole array) is a
+  scalar and is therefore introduced by a <samp>$</samp>. For instance:</p>
+<form action='perl.cgi' method='post'>
+<textarea cols='80' rows='2' name='script'>
+@values = ("Zero", "One", "Two", "Three");
+print "$values[2]\n";
+</textarea>
+<input type='submit' value='Run' />
+</form>
+
+<p>There is a third way of storing data known as the 'hash'. This is
+  like an array, but instead of using an integer as an index to find
+  an individual (scalar) value as is done in an array, we use a string
+  as an index (or 'key') into the hash. To extend the analogy of a
+  road of houses, while an array has houses with numbers, a hash is a
+  posh private road which has houses with names instead of numbers. We
+  refer to a whole hash by introducing its name with a <samp>%</samp>.
+  There is one other difference from arrays: in an array, we place the
+  index in square brackets <samp>[&nbsp;]</samp> while in a hash, we
+  place the key in curly brackets <samp>{&nbsp;}</samp>.
+</p>
+
+<p>One other thing you need to know when using hashes - how do you
+  know what 'keys' have been used? With an array you know that the
+  indices are numbers starting from zero and counting upwards. With a
+  hash, the keys could be anything. Perl provides a function called
+  (suprisingly!) <samp>keys</samp> which takes a whole hash and
+  returns an array containing the keys. e.g.</p>
+
+<pre>
+@theKeys = keys %myHash;
+</pre>
+
+<p>You can then step through that array in the usual ways (e.g. using
+  a <samp>foreach(){}</samp> loop) to access each key in turn. You
+  don't have to place the keys into an array explicitly, so you can do
+  something like:</p>
+
+<pre>
+foreach $key (keys %myHash)
+{
+   # Do something here
+}
+</pre>
+
+<p>Here is a little example that takes a piece of text, splits it into
+  words (storing these in an array) and then uses those words as keys
+  in a hash to count how many times each word occurs.</p>
+
+<form action='perl.cgi' method='post'>
+<textarea cols='80' rows='20' name='script'>
+# Initialize a string with some text
+$text = "Once upon a time there was a man who had a time machine";
+# Split it up into words
+@words = split(/\s+/, $text);
+
+# Step through the words, using each as a key to a hash and
+# incrementing the number stored at that slot in the hash
+foreach $word (@words)
+{
+    $wordCounts{$word}++;
+}
+
+# Step through the keys of the hash (the words) and for each, 
+# print the word and the count
+foreach $word (keys %wordCounts)
+{
+   print "$word: $wordCounts{$word}\n";
+}
+</textarea>
+<input type='submit' value='Run' />
+</form>
+
+<p>This has introduced a small variation on the <samp>split()</samp>
+  function. Previously we just used it by itself - this splits what is
+  known as the 'default variable' (a special scalar variable that is
+  used for things like reading a file if you don't specify anything
+  else) and splits it at white space. Here we need to split something
+  different (the string containing the text), so we have to give that
+  as a parameter to the <samp>split<samp> function. Unfortunately it
+  has to be the second parameter - the first parameter
+  specifies <i>where</i> we split. We have to provide a pattern of
+  characters where we have to make the split - these patterns are
+  known as 'regular expressions' and are enclosed in two forward
+  slashes: <samp>/&nbsp;/</samp>
 
 </body>
 
