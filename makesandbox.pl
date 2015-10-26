@@ -57,6 +57,10 @@ use strict;
 use config;
 
 # Read the confiuration file
+if(! -e 'chrootperl.cfg')
+{
+    Die("chrootperl.cfg does not exist.\nCopy the example file (chrootperl.cfg.example) and edit as required.");
+}
 my %config = config::ReadConfig('chrootperl.cfg');
 
 # Collect config values
