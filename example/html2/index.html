@@ -1,5 +1,6 @@
 <html>
-<head><title>Perl interpreter</title>
+<head>
+<title>Perl interpreter</title>
 <style type='text/css'>
 pre, samp {background: #DDDDDD;
       border: 1pt solid #CCCCCC;
@@ -11,7 +12,15 @@ pre {padding: 5pt 20pt;}
 </head>
 <body>
 
-<h1>An introduction to using Perl in Bioinformatics</h1>
+<!-- [page menu='Home'] -->
+
+<!-- [bigheading] -->
+<h1>BIOC3010</h1>
+<h2>An introduction to using Perl in Bioinformatics</h2>
+<p>A brief introduction to the Perl programming labguage and its
+  application in Bioinformatics</p>
+<!-- [/bigheading] -->
+
 
 <h2>What is Perl?</h2>
 
@@ -64,6 +73,10 @@ is designed as a powerful scripting language making it easy and fast
   way, you should use a version of Perl installed on your own
   machine.</p>
 
+<!-- [/page] -->
+
+<!-- [page menu='Files'] -->
+
 <h2>Reading a file</h2>
 <p>We are going to start with a very simple program that reads the
   contents of a file and prints it to the screen. The file you are
@@ -92,11 +105,12 @@ while(&lt;&gt;)
   curly brackets'.</p>
 
 <p>In this case the condition (the thing that has to be true) is
-  written as &lt;&gt;. This is a bit of Perl shorthand magic that says
-  'read a line from the file specified on the command line'.</p>
+  written as <samp>&lt;&gt;</samp>. This is a bit of Perl shorthand
+  magic that says 'read a line from the file specified on the command
+  line'.</p>
 
 <p>The thing between the curly brackets in this case is introduced
-  with a # - this introduces a comment. It doesn't do anything at all,
+  with a <samp>#</samp> - this introduces a comment. It doesn't do anything at all,
   but helps explain what your code is doing - it just makes things
   more readable.</p>
 
@@ -118,6 +132,9 @@ while(<>)
 </textarea>
 <input type='submit' value='Run' />
 </form>
+
+<!-- [/page] -->
+<!-- [page menu='PDB'] -->
 
 <h2>PDB Files</h2>
 
@@ -184,6 +201,9 @@ ATOM     24  CD1 ILE L   2      11.437 -10.700  36.576  1.00 23.75           C
   words how much it is vibrating about the indicated position.</li>
 <li>The twelfth column represents the element type.</li>
 </ul>
+
+<!-- [/page] -->
+<!-- [page menu='Scalars'] -->
 
 <h2>Scalar variables</h2>
 
@@ -260,6 +280,8 @@ print "There were $total lines\n";
 -->
 
 
+<!-- [/page] -->
+<!-- [page menu='Arrays'] -->
 
 <h2>Columns and arrays</h2>
 
@@ -462,7 +484,8 @@ foreach $word (@words)
 </ul>
 
 
-
+<!-- [/page] -->
+<!-- [page menu='Hashes'] -->
 
 <h2>Hashes</h2>
 <p>We have so far met two ways of storing data:</p>
@@ -565,20 +588,75 @@ foreach $word (keys %wordCounts)
   different (the string containing the text), so we have to give that
   as a parameter to the <samp>split</samp> function. Unfortunately it
   has to be the second parameter - the first parameter
-  specifies <i>where</i> we split. </p>
+  specifies <i>where</i> we split. We have to provide a pattern of
+  characters where we have to make the split - these patterns are
+  known as 'regular expressions' and are enclosed in two forward
+  slashes: <samp>/&nbsp;/</samp>. The regular expression contains two
+  elements: <samp>\s</samp> which matches any type of whitespace
+  (normal spaces, tabs and line breaks) and <samp>+</samp> which
+  indicates 'one-or-more' of the thing that came before it in the
+  regular expression. In other words, this will split on one-or-more
+  whitespaces so both:</p>
+<pre>
+One Two Three
+</pre>
+and 
+<pre>
+One      Two              Three
+</pre>
+<p>would be split into an array containing the values "One", "Two" and
+"Three".</p>
 
-<p>We have to provide a pattern of characters where we have to make
-  the split - these patterns are known as 'regular expressions' and
-  are enclosed in two forward slashes: <samp>/&nbsp;/</samp>
-  The <samp>\s</samp> represents a 'whitespace' - a space, a tab
-  character or a return character. The following <samp>+</samp> means
-  one or more of the previous character. Consequently the pattern we
-  have specified means to take one or more spaces
+<p>We have seen how we can use hashes, so let's apply them to obtain a
+  list oft he chains present in our PDB file. If we read our PDB file as
+  before and split each line into columns, we can use the chain label (stored
+  in <samp>$column[4]</samp>) as a key into a hash. In this case the
+  value we store doesn't matter: each time we read another line from
+  the file we will overwrite the value that is stored. All we care
+  about is the list of keys.</p>
 
+<p>Go ahead and see if you can write the code. Remember what you
+  need:</p>
+<ol>
+<li>Read the file a line at a time with a <samp>while(<>){}</samp>
+  loop.</li>
+<li> For each line...</li>
+     <ul>
+     <li>Split each line using <samp>split</samp></li>
+     <li>Use the chain label stored in <samp>$column[4]</samp> as the key
+         of a hash, setting the value to whatever you like (e.g. to
+         1)</li>
+     </ul>
+<li>Once the file is fully read, obtain the keys of the hash and print
+  them</li>
+</ol>
 
+<p>I've provided an outline with some comments describing the code you
+  need to write:</p>
 
-</p>
+<form action='perl.cgi' method='post'>
+<textarea cols='80' rows='5' name='script'>
+while(<>)
+{
+    # Split the line into columns
 
+    # Use $column[4] as the key to a hash - store the number 1 as the value
+
+}
+# Obtain the keys of the hash
+
+# Print the keys
+</textarea>
+<input type='submit' value='Run' />
+</form>
+
+<p>Now modify the code so that you obtain:</p>
+<ul>
+<li>First, the number of atoms in each chain</li>
+<li>Second, the number of residues in each chain</li>
+</ul>
+
+<!-- [/page] -->
 
 </body>
 
