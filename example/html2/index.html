@@ -563,12 +563,31 @@ foreach $word (keys %wordCounts)
   used for things like reading a file if you don't specify anything
   else) and splits it at white space. Here we need to split something
   different (the string containing the text), so we have to give that
-  as a parameter to the <samp>split<samp> function. Unfortunately it
+  as a parameter to the <samp>split</samp> function. Unfortunately it
   has to be the second parameter - the first parameter
   specifies <i>where</i> we split. We have to provide a pattern of
   characters where we have to make the split - these patterns are
   known as 'regular expressions' and are enclosed in two forward
-  slashes: <samp>/&nbsp;/</samp>
+  slashes: <samp>/&nbsp;/</samp>. The regular expression contains two
+  elements: <samp>\s</samp> which matches any type of whitespace
+  (normal spaces, tabs and line breaks) and <samp>+</samp> which
+  indicates 'one-or-more' of the thing that came before it in the
+  regular expression. In other words, this will split on one-or-more
+  whitespaces so both:</p>
+<pre>
+One Two Three
+</pre>
+and 
+<pre>
+One      Two              Three
+</pre>
+<p>would be split into an array containing the values "One", "Two" and
+"Three".</p>
+
+<p>We have seen how we can use hashes, so let's apply them to see what
+  chains are present in our PDB file. If we read our PDB file as
+  before, split each line into columns and use the chain label (stored
+  in <samp>$column[4]</samp>)
 
 </body>
 
