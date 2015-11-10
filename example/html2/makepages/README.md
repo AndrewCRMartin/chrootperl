@@ -23,9 +23,6 @@ item to access this page.
 Creates a big heading on the front page. This is expected to contain a
 short <h1> heading, and maybe an <h2> heading and some <p> text.
 
-The following are not yet implemented
--------------------------------------
-
     <!-- [callout] -->
     <!-- [/callout] -->
 
@@ -51,6 +48,15 @@ Creates a note box
 
 Creates an information box
 
+    <!-- [instruction] -->
+    <!-- [/instruction] -->
+
+Creates an instruction that the reader might be expected to follow.
+
+
+The following are partially implemented
+----------------------------------------
+
     <!-- [popup text='xxx'] -->
     <!-- [/popup] -->
 
@@ -61,17 +67,19 @@ Creates a popup
 
 Creates a help text popup
 
+***The code seems to be right but the actual popup isn't happening -
+probably the right JavaScript isn't activated***
+
+
+The following are not yet implemented
+-------------------------------------
+
     <!-- [accordion] -->
     <!-- [ai] -->
     <!-- [/ai] -->
     <!-- [/accordion] -->
 
 Creates an accordion `ai` is analagous to `<li>`
-
-    <!-- [instruction] -->
-    <!-- [/instruction] -->
-
-Creates an instruction that the reader might be expected to follow.
 
     <!-- [box title='xxx'] -->
     <!-- [/box] -->

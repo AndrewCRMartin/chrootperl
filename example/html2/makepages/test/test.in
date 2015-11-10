@@ -1,0 +1,86 @@
+<html>
+<head>
+<title>Makepages test</title>
+<style type='text/css'>
+pre, samp {background: #DDDDDD;
+      border: 1pt solid #CCCCCC;
+      border-radius: 5pt;
+      padding: 1pt;
+}
+pre {padding: 5pt 20pt;}
+</style>
+</head>
+
+<body>
+<!-- [page menu='Home'] -->
+
+<!-- [bigheading] -->
+<h1>Makepages</h1>
+<h2>An script to generate a set of HTML pages</h2>
+<p>Makepages generates attractive Bootstrap pages from a single master HTML file
+which includes additional markup</p>
+<!-- [/bigheading] -->
+
+<h2>makepages</h2>
+
+<p>
+makepages is a small script for splitting a single large HTML file
+into separate pages with a Continue button to progress through pages
+and a menu, all formatted using Bootstrap. The idea is to make things
+a little easier than creating pages from scratch.
+</p>
+
+
+<!-- [callout] -->
+<p>This is a callout</p>
+<!-- [/callout] -->
+
+<!-- [warning] -->
+<p>This is a warning</p>
+<!-- [/warning] -->
+
+<!-- [important] -->
+<p>This text is important</p>
+<!-- [/important] -->
+
+<!-- [note] -->
+<p>This is a note</p>
+<!-- [/note] -->
+
+<!-- [information] -->
+<p>This is for information</p>
+<!-- [/information] -->
+
+<p>This is a <!-- [popup text='more information!'] --> popup <!-- [/popup] --></p>
+
+<p>This is a <!-- [help text='more information!'] --> help popup <!-- [/help] --></p>
+
+<!-- [instruction] -->
+<p>This is an instruction</p>
+<!-- [/instruction] -->
+
+<h3>The following are not yet implemented</h3>
+
+    <!-- [accordion] -->
+    <!-- [ai] -->
+    <!-- [/ai] -->
+    <!-- [/accordion] -->
+
+Creates an accordion `ai` is analagous to `<li>`
+
+    <!-- [box title='xxx'] -->
+    <!-- [/box] -->
+
+Creates a boxed-out region of text (using a `panel`)
+
+    <!-- [confirm script='xxx'] -->
+    <!-- [/confirm] -->
+
+Creates a confirmation box for a reader to confirm that they have done
+something.
+
+
+<!-- [/page] -->
+
+</body>
+</html>

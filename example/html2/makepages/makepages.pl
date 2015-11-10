@@ -124,10 +124,37 @@ border-bottom-right-radius: 5px;
 -moz-border-radius-bottomright: 5px;
 -webkit-border-bottom-right-radius: 5px;
 }
+.question p {margin: 0; padding: 0}
 
 __EOF
         close $fp;
     }
+
+    if(open(my $fp, '>', 'autotooltip.js'))
+    {
+        print $fp <<'__EOF';
+// Auto-activate tooltips and popovers so they work like everything else
+// Taken from:
+// http://stackoverflow.com/questions/9302667/how-to-get-twitter-bootstrap-jquery-elements-tooltip-popover-etc-working/14761703#14761703
+//
+// Use as
+// <a rel="tooltip" title="My tooltip">Link</a>
+// <a data-toggle="popover" data-content="test">Link</a>
+// <button data-toggle="tooltip" data-title="My tooltip">Button</button>
+
+$(function () {
+    $('body').popover({
+        selector: '[data-toggle="popover"]'
+    });
+
+    $('body').tooltip({
+        selector: 'a[rel="tooltip"], [data-toggle="tooltip"]'
+    });
+});
+__EOF
+        close $fp;
+    }
+
 }
 
 #******************************************************************
@@ -290,36 +317,6 @@ sub GetHomeMenu
 
 
 #******************************************************************
-#> PrintHTMLPage($fp, $aPage);
-sub PrintHTMLPage
-{
-    my($fp, $aPage) = @_;
-
-    print $fp " <div class='container theme-showcase'>\n";
-
-    FixUp_bigheading($aPage);
-
-    foreach my $line (@$aPage)
-    {
-        print $fp $line;
-    }
-
-    print $fp " </div> <!-- /container -->\n";
-}
-
-#******************************************************************
-sub FixUp_bigheading
-{
-    my($aPage) = @_;
-
-    foreach my $line (@$aPage)
-    {
-        $line = Replace($line, 'bigheading','<div class="jumbotron">');
-        $line = Replace($line, '/bigheading','</div> <!-- jumbotron -->');
-    }
-}
-
-#******************************************************************
 sub Replace
 {
     my($line, $old, $new) = @_;
@@ -347,8 +344,8 @@ sub PrintHTMLFooter
     <script src="bootstrap/assets/js/jquery.js"></script>
     <script src="bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="bootstrap/assets/js/holder.js"></script>
-    <script src="autotooltip.js"></script>
 -->
+    <script src="autotooltip.js"></script>
   </body>
 </html>
 __EOF
@@ -471,3 +468,152 @@ sub PrintHTMLHeader
 __EOF
 }
 
+#******************************************************************
+#> PrintHTMLPage($fp, $aPage);
+sub PrintHTMLPage
+{
+    my($fp, $aPage) = @_;
+
+    print $fp " <div class='container theme-showcase'>\n";
+
+    FixUp_bigheading($aPage);
+    FixUp_callout($aPage);
+    FixUp_warning($aPage);
+    FixUp_important($aPage);
+    FixUp_note($aPage);
+    FixUp_information($aPage);
+    FixUp_popup($aPage);
+    FixUp_help($aPage);
+    FixUp_instruction($aPage);
+
+    foreach my $line (@$aPage)
+    {
+        print $fp $line;
+    }
+
+    print $fp " </div> <!-- /container -->\n";
+}
+
+#******************************************************************
+sub FixUp_bigheading
+{
+    my($aPage) = @_;
+
+    foreach my $line (@$aPage)
+    {
+        $line = Replace($line, 'bigheading','<div class="jumbotron">');
+        $line = Replace($line, '/bigheading','</div> <!-- jumbotron -->');
+    }
+}
+
+#******************************************************************
+sub FixUp_callout
+{
+    my($aPage) = @_;
+
+    foreach my $line (@$aPage)
+    {
+        $line = Replace($line, 'callout','<div class="bs-callout bs-callout-info">');
+        $line = Replace($line, '/callout','</div> <!-- callout -->');
+    }
+}
+
+#******************************************************************
+sub FixUp_warning
+{
+    my($aPage) = @_;
+
+    foreach my $line (@$aPage)
+    {
+        $line = Replace($line, 'warning','<div class="alert alert-danger">');
+        $line = Replace($line, '/warning','</div> <!-- alert-danger -->');
+    }
+}
+
+#******************************************************************
+sub FixUp_important
+{
+    my($aPage) = @_;
+
+    foreach my $line (@$aPage)
+    {
+        $line = Replace($line, 'important','<div class="bs-callout bs-callout-danger">');
+        $line = Replace($line, '/important','</div> <!-- bs-callout-danger -->');
+    }
+}
+
+#******************************************************************
+sub FixUp_note
+{
+    my($aPage) = @_;
+
+    foreach my $line (@$aPage)
+    {
+        $line = Replace($line, 'note','<div class="bs-callout bs-callout-warning">');
+        $line = Replace($line, '/note','</div> <!-- bs-callout-warning -->');
+    }
+}
+
+#******************************************************************
+sub FixUp_information
+{
+    my($aPage) = @_;
+
+    foreach my $line (@$aPage)
+    {
+        $line = Replace($line, 'information','<div class="alert alert-info">');
+        $line = Replace($line, '/information','</div> <!-- alert-info -->');
+    }
+}
+
+#******************************************************************
+sub FixUp_instruction
+{
+    my($aPage) = @_;
+
+    foreach my $line (@$aPage)
+    {
+        $line = Replace($line, 'instruction','<div class="question">');
+        $line = Replace($line, '/instruction','</div> <!-- question -->');
+    }
+}
+
+#******************************************************************
+sub ReplaceParam
+{
+    my($line, $tag, $attribute, $replace) = @_;
+    my $regex = '<!--\s+\[' . $tag . '\s+' . $attribute . "=['\"](.*)['\"]" . '\s*\]\s+--\>';
+    if($line =~ $regex)
+    {
+        my $value = $1;
+        $replace =~ s/\{\}/$value/;
+        $line =~ s/$regex/$replace/;
+    }
+    return($line);
+}
+
+#******************************************************************
+sub FixUp_popup
+{
+    my($aPage) = @_;
+
+    foreach my $line (@$aPage)
+    {
+        $line = ReplaceParam($line, 'popup', 'text', '<a data-toggle="popover" data-trigger="focus" data-content="{}">');
+        $line = Replace($line, '/popup','</a>');
+    }
+
+}
+
+#******************************************************************
+sub FixUp_help
+{
+    my($aPage) = @_;
+
+    foreach my $line (@$aPage)
+    {
+        $line = ReplaceParam($line, 'help', 'text', '<a data-toggle="popover" data-trigger="focus" data-content="{}">');
+        $line = Replace($line, '/help','<span class="glyphicon glyphicon-question-sign"></span></a>');
+    }
+
+}
