@@ -37,3 +37,6 @@ The `html2` directory builds on this providing a more extensive web
 page designed as a very simple tutorial introduction to the basics of
 Perl programming.
 
+This example is designed to be processed using `makepages` from
+https://github.com/AndrewCRMartin/makepages
+
