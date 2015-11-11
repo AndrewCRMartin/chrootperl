@@ -62,7 +62,14 @@ a little easier than creating pages from scratch.
 <h3>The following are not yet implemented</h3>
 
     <!-- [accordion] -->
-    <!-- [ai] -->
+    <!-- [ai title='Section 1'] -->
+    This is section 1
+    <!-- [/ai] -->
+    <!-- [ai title='Section 2'] -->
+    This is section 2
+    <!-- [/ai] -->
+    <!-- [ai title='Section 3'] -->
+    This is section 3
     <!-- [/ai] -->
     <!-- [/accordion] -->
 

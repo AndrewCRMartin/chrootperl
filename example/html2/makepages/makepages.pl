@@ -3,6 +3,9 @@
 use strict;
 my $noflags = 1;
 
+$::accordionCount = 0;
+$::collapseCount  = 0;
+
 if(defined($::h))
 {
     UsageDie();
@@ -319,9 +322,22 @@ sub GetHomeMenu
 #******************************************************************
 sub Replace
 {
-    my($line, $old, $new) = @_;
+    my($line, $old, $new, $idStem, $sCounter) = @_;
     my $regex = '<!--\s+\[' . $old . '\]\s+--\>';
-    $line =~ s/$regex/$new/;
+    if(scalar(@_) > 3)
+    {
+        if($line =~ /$regex/)
+        {
+            $$sCounter++;
+            my $id = "$idStem$$sCounter";
+            $new =~ s/\{\}/$id/;
+            $line =~ s/$regex/$new/;
+        }
+    }
+    else
+    {
+        $line =~ s/$regex/$new/;
+    }
     return($line);
 }
 
@@ -484,6 +500,8 @@ sub PrintHTMLPage
     FixUp_popup($aPage);
     FixUp_help($aPage);
     FixUp_instruction($aPage);
+    FixUp_accordion($aPage);
+    FixUp_ai($aPage);
 
     foreach my $line (@$aPage)
     {
@@ -616,3 +634,51 @@ sub FixUp_help
     }
 
 }
+
+#******************************************************************
+sub FixUp_accordion
+{
+    my($aPage) = @_;
+
+    foreach my $line (@$aPage)
+    {
+        $line = Replace($line, 'accordion', '<div class="panel-group" id="{}">', 'accordion', \$::accordionCount);
+        $line = Replace($line, '/accordion','</div> <!-- panel-group -->');
+    }
+
+}
+
+#******************************************************************
+sub FixUp_ai
+{
+    my($aPage) = @_;
+
+    my $regexStart = '<!--\s+\[ai\s+title=[\'\"](.*)[\'\"]\s*\]\s+--\>';
+    my $regexStop  = '<!--\s+\[\/ai\]\s+--\>';
+    my $accordion  = "accordion$::accordionCount";
+
+    foreach my $line (@$aPage)
+    {
+        if($line =~ /$regexStart/)
+        {
+            my $title = $1;
+            $::collapseCount++;
+            my $collapse = "collapse$::collapseCount";
+            $line = "  <div class='panel panel-default'>
+    <div class='panel-heading'>
+      <h4 class='panel-title'>
+        <a class='accordion-toggle' data-toggle='collapse' data-parent='#$accordion' href='#$collapse'>
+           <span class='glyphicon glyphicon-collapse-down'></span> $title
+        </a>
+      </h4>
+    </div>
+    <div id='$collapse' class='panel-collapse collapse'>
+      <div class='panel-body'>";
+        }
+        elsif($line =~ /$regexStop/)
+        {
+            $line = "      </div>\n    </div>\n  </div>\n";
+        }
+    }
+}
+

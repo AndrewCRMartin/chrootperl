@@ -63,16 +63,17 @@ Creates a popup
 
 Creates a help text popup
 
-
-The following are not yet implemented
--------------------------------------
-
     <!-- [accordion] -->
-    <!-- [ai] -->
+    <!-- [ai title='xxx'] -->
     <!-- [/ai] -->
     <!-- [/accordion] -->
 
 Creates an accordion `ai` is analagous to `<li>`
+
+
+
+The following are not yet implemented
+-------------------------------------
 
     <!-- [box title='xxx'] -->
     <!-- [/box] -->
