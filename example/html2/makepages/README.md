@@ -6,10 +6,20 @@ into separate pages with a Continue button to progress through pages
 and a menu, all formatted using Bootstrap. The idea is to make things
 a little easier than creating pages from scratch.
 
+The single page is designed to be normal viewable HTML. 
+
+The additional markup is inserted using 'metatags' that are contained
+in HTML comments. The metatags are contained in [] rather than <>:
+
+    <!-- [tagname attribute='value'] -->
+    ...Content...
+    <!-- [/tagname] -->
 
 
-The single page is designed to be normal viewable HTML. Additional
-formatting is introduced using the following HTML comments:
+Creating pages
+--------------
+
+Each page is separated with
 
     <!-- [page menu='xxx'] -->
     <!-- [/page] -->
@@ -17,85 +27,102 @@ formatting is introduced using the following HTML comments:
 These comments are wrapped around each page - the 'xxx' is the menu
 item to access this page.
 
+The title (index) page
+----------------------
+
+The title (index) page is expected to have a big heading. This should
+contain a short <h1> heading (which will also be used as a 'home' menu
+item on each page), and maybe an <h2> heading and some <p> text.
+
     <!-- [bigheading] -->
     <!-- [/bigheading] -->
 
-Creates a big heading on the front page. This is expected to contain a
-short <h1> heading, and maybe an <h2> heading and some <p> text.
+Information and callouts
+------------------------
+
+A callout box
 
     <!-- [callout] -->
     <!-- [/callout] -->
 
-Creates a callout box
+A warning box
 
     <!-- [warning] -->
     <!-- [/warning] -->
 
-Creates a warning box
+An important box
 
     <!-- [important] -->
     <!-- [/important] -->
 
-Creates an important box
+A note box
 
     <!-- [note] -->
     <!-- [/note] -->
 
-Creates a note box
+An information box
 
     <!-- [information] -->
     <!-- [/information] -->
 
-Creates an information box
+An instruction that the reader might be expected to follow
 
     <!-- [instruction] -->
     <!-- [/instruction] -->
 
-Creates an instruction that the reader might be expected to follow.
+Popups
+------
+
+You can create a popup link within the text with
 
     <!-- [popup text='xxx'] -->
     <!-- [/popup] -->
 
-Creates a popup
+Or, if it's specifically a help popup where you want a question mark glyph, then:
 
     <!-- [help text='xxx'] -->
     <!-- [/help] -->
 
-Creates a help text popup
+Accordions and box-outs
+-----------------------
+
+You can create an accordion as follows - `ai` is analagous to `<li>`
 
     <!-- [accordion] -->
     <!-- [ai title='xxx'] -->
     <!-- [/ai] -->
     <!-- [/accordion] -->
 
-Creates an accordion `ai` is analagous to `<li>`
-
-
-
-The following are not yet implemented
--------------------------------------
+A box has similar styling to an accordion but doesn't shrink and expand
 
     <!-- [box title='xxx'] -->
     <!-- [/box] -->
 
-Creates a boxed-out region of text (using a `panel`)
+Confirmation box
+----------------
+
+This is designed to provide a box where a user of the page can enter a
+name and email and confirm something - e.g. that they have done an
+exercise to the best of their ability or that they have read terms and
+conditions.
 
     <!-- [confirm script='xxx'] -->
+    I confirm that I have done the tutorial to the best of my ability
     <!-- [/confirm] -->
 
-Creates a confirmation box for a reader to confirm that they have done
-something.
+A `participants` directory will be created containing a file for each
+user. This file contains the name and email information and the time
+at which the clicked the confirm box.
 
+Additional style information
+----------------------------
 
+The contents of the first `<style>` tag in the HTML `<head>` section
+will be copied onto each page.
 
+Favicon
+-------
 
+You can place a file 'favicon.png' in the directory if you wish to set
+the favourites icon on each page.
 
-
-
-
-
-
-
-
-Note that any style information and the title are copied from the
-normal HTML `<head>` section.

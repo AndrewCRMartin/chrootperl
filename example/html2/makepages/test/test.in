@@ -18,7 +18,7 @@ pre {padding: 5pt 20pt;}
 <h1>Makepages</h1>
 <h2>An script to generate a set of HTML pages</h2>
 <p>Makepages generates attractive Bootstrap pages from a single master HTML file
-which includes additional markup</p>
+which includes additional markup using metatags.</p>
 <!-- [/bigheading] -->
 
 <h2>makepages</h2>
@@ -30,14 +30,33 @@ and a menu, all formatted using Bootstrap. The idea is to make things
 a little easier than creating pages from scratch.
 </p>
 
+<p>
+Formatting is created by using metatags buried in HTML comments of the form:
+</p>
+<pre>
+&lt;-- [tag] --&gt;
+&lt;-- [/tag] --&gt;
+</pre>
 
-<!-- [callout] -->
-<p>This is a callout</p>
-<!-- [/callout] -->
+<p>Each page is created using:</p>
+<pre>
+&lt;-- [page menu='xxx'] --&gt;
+&lt;-- [/page] --&gt;
+</pre>
+
+<p>The rest of this page contains examples</p>
+
+<!-- [information] -->
+<p>This is for information</p>
+<!-- [/information] -->
 
 <!-- [warning] -->
 <p>This is a warning</p>
 <!-- [/warning] -->
+
+<!-- [callout] -->
+<p>This is a callout</p>
+<!-- [/callout] -->
 
 <!-- [important] -->
 <p>This text is important</p>
@@ -47,10 +66,6 @@ a little easier than creating pages from scratch.
 <p>This is a note</p>
 <!-- [/note] -->
 
-<!-- [information] -->
-<p>This is for information</p>
-<!-- [/information] -->
-
 <p>This is a <!-- [popup text='more information!'] --> popup <!-- [/popup] --></p>
 
 <p>This is a <!-- [help text='more information!'] --> help popup <!-- [/help] --></p>
@@ -59,33 +74,26 @@ a little easier than creating pages from scratch.
 <p>This is an instruction</p>
 <!-- [/instruction] -->
 
-<h3>The following are not yet implemented</h3>
 
-    <!-- [accordion] -->
-    <!-- [ai title='Section 1'] -->
-    This is section 1
-    <!-- [/ai] -->
-    <!-- [ai title='Section 2'] -->
-    This is section 2
-    <!-- [/ai] -->
-    <!-- [ai title='Section 3'] -->
-    This is section 3
-    <!-- [/ai] -->
-    <!-- [/accordion] -->
+<!-- [accordion] -->
+<!-- [ai title='Section 1'] -->
+This is section 1
+<!-- [/ai] -->
+<!-- [ai title='Section 2'] -->
+This is section 2
+<!-- [/ai] -->
+<!-- [ai title='Section 3'] -->
+This is section 3
+<!-- [/ai] -->
+<!-- [/accordion] -->
 
-Creates an accordion `ai` is analagous to `<li>`
+<!-- [box title='Box title'] -->
+This is a boxed region
+<!-- [/box] -->
 
-    <!-- [box title='xxx'] -->
-    <!-- [/box] -->
-
-Creates a boxed-out region of text (using a `panel`)
-
-    <!-- [confirm script='xxx'] -->
-    <!-- [/confirm] -->
-
-Creates a confirmation box for a reader to confirm that they have done
-something.
-
+<!-- [confirm] -->
+Please confirm that you have completed this work to the best of your ability.
+<!-- [/confirm] -->
 
 <!-- [/page] -->
 
