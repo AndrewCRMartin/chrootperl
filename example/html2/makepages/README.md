@@ -53,10 +53,6 @@ Creates an information box
 
 Creates an instruction that the reader might be expected to follow.
 
-
-The following are partially implemented
-----------------------------------------
-
     <!-- [popup text='xxx'] -->
     <!-- [/popup] -->
 
@@ -66,9 +62,6 @@ Creates a popup
     <!-- [/help] -->
 
 Creates a help text popup
-
-***The code seems to be right but the actual popup isn't happening -
-probably the right JavaScript isn't activated***
 
 
 The following are not yet implemented
