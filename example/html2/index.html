@@ -8,6 +8,7 @@ pre, samp {background: #DDDDDD;
       padding: 1pt;
 }
 pre {padding: 5pt 20pt;}
+samp {padding: 1pt 5pt;}
 </style>
 </head>
 <body>
@@ -67,11 +68,14 @@ is designed as a powerful scripting language making it easy and fast
   graphical interfaces, so you need to get used to using the command
   line!</p>
 
+<!-- [information] -->
 <p>In this practical, we have created a simple way for you to enter a
-  Perl script via a web page and run it over the web. This is purely
+  Perl script via a web page and run it over the web. The same text file
+  will always be given to the script as input. This is purely
   for this teaching exercise. Once you have learned the basics this
   way, you should use a version of Perl installed on your own
   machine.</p>
+<!-- [/information] -->
 
 <!-- [/page] -->
 
@@ -279,6 +283,25 @@ print "There were $total lines\n";
 </pre>
 -->
 
+<div><br /></div>
+
+<!-- [warning] -->
+
+<p>Did it work or did you get no answer back?</p>
+
+<p>Unfortunately, with this online version of Perl, we don't have a
+  way of showing you any error messages from the Perl interpreter. The
+  most likely errors are:</p>
+
+<ul>
+<li>You forgot a <samp>$</samp> sign in front of a variable name</li>
+<li>You forgot a <samp>;</samp> at the end of a normal statement</li>
+<li>You accidentally included a <samp>;</samp> at the end of a control
+  statement (e.g. <samp>while(<>); { }</samp></li>
+<li>You didn't match a <samp>{</samp> with a <samp>}</samp> of
+  a <samp>(</samp> with a <samp>)</samp></li>
+</ul>
+<!-- [/warning] -->
 
 <!-- [/page] -->
 <!-- [page menu='Arrays'] -->
@@ -387,7 +410,11 @@ while(<>)
 print "There were $total residues\n";
 -->
 
-<h3>Loops and arrays</h3>
+<!-- [/page] -->
+
+<!-- [page menu='Loops'] -->
+
+<h2>Loops and arrays</h2>
 
 <p>
 You have already seen the <samp>while(){}</samp> loop used to repeat a
@@ -517,6 +544,8 @@ print "$values[2]\n";
 <input type='submit' value='Run' />
 </form>
 
+<div><br /></div>
+
 <p>There is a third way of storing data known as the 'hash'. This is
   like an array, but instead of using an integer as an index to find
   an individual (scalar) value as is done in an array, we use a string
@@ -579,6 +608,8 @@ foreach $word (keys %wordCounts)
 </textarea>
 <input type='submit' value='Run' />
 </form>
+
+<div><br /></div>
 
 <p>This has introduced a small variation on the <samp>split()</samp>
   function. Previously we just used it by itself - this splits what is
