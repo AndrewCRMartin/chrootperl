@@ -289,11 +289,19 @@ print "There were $total lines\n";
 
 <p>Did it work or did you get no answer back?</p>
 
-<p>Unfortunately, with this online version of Perl, we don't have a
-  way of showing you any error messages from the Perl interpreter. The
-  most likely errors are:</p>
+<p>Sometimes you might see nothing at all or nothing where you
+  expected to see something. The most likely reason for this is that
+  you misspelled a variable name.</p>
+
+<p>Error messages from the Perl interpreter may be a little
+  confusing. The main thing to look for is the line number where an
+  error occurred. Look at that line to see if you can find an
+  error. If not look on the two or three lines preceding it.</p>
+
+<p>The most likely errors are:</p>
 
 <ul>
+<li>You misspelled a variable name</li>
 <li>You forgot a <samp>$</samp> sign in front of a variable name</li>
 <li>You forgot a <samp>;</samp> at the end of a normal statement</li>
 <li>You accidentally included a <samp>;</samp> at the end of a control
@@ -641,7 +649,7 @@ One      Two              Three
 <p>We have seen how we can use hashes, so let's apply them to obtain a
   list oft he chains present in our PDB file. If we read our PDB file as
   before and split each line into columns, we can use the chain label (stored
-  in <samp>$column[4]</samp>) as a key into a hash. In this case the
+  in <samp>$columns[4]</samp>) as a key into a hash. In this case the
   value we store doesn't matter: each time we read another line from
   the file we will overwrite the value that is stored. All we care
   about is the list of keys.</p>
@@ -654,7 +662,7 @@ One      Two              Three
 <li> For each line...</li>
      <ul>
      <li>Split each line using <samp>split</samp></li>
-     <li>Use the chain label stored in <samp>$column[4]</samp> as the key
+     <li>Use the chain label stored in <samp>$columns[4]</samp> as the key
          of a hash, setting the value to whatever you like (e.g. to
          1)</li>
      </ul>
@@ -666,12 +674,12 @@ One      Two              Three
   need to write:</p>
 
 <form action='perl.cgi' method='post'>
-<textarea cols='80' rows='5' name='script'>
+<textarea cols='80' rows='15' name='script'>
 while(<>)
 {
     # Split the line into columns
 
-    # Use $column[4] as the key to a hash - store the number 1 as the value
+    # Use $columns[4] as the key to a hash - store the number 1 as the value
 
 }
 # Obtain the keys of the hash
@@ -706,6 +714,9 @@ while(<>)
   then you need to install
   <a href='http://www.activestate.com/activeperl'>ActivePerl</a> or
   <a href='http://strawberryperl.com/'>Strawberry Perl</a>.</p>
+
+<p>There is also an online Perl interpreter that you can play with at
+<a href='http://www.tutorialspoint.com/execute_perl_online.php'>http://www.tutorialspoint.com/execute_perl_online.php</a>.</p>
 
 <p>There are several good books on Perl - some aimed specifically at
   Bioinformatics:</p>

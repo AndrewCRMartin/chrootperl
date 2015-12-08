@@ -19,7 +19,7 @@ if('%%DEST%%' eq '')
 }
 
 my $infile = "/tmp/test.pdb";
-my $result = `%%DEST%%/chrootperl $tfile $infile`;
+my $result = `%%DEST%%/chrootperl $tfile $infile 2>&1`;
 
 print $::cgi->header();
 
