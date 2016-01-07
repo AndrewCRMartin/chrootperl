@@ -25,8 +25,8 @@ The config file also allows you to specify:
 - any additional directories that you will need to run your Perl scripts.
   `/bin`, `/lib` and `/lib64` will be automatically available as well 
   as `/run` which is used to store the Perl script (`$DIRS`)
-- the destination where the `chrootperl` executable will live. By
-  default this is `/usr/local/bin`, but you must ensure that if this
+- the destination where the `chrootperl` executable will live. If not
+  specified, this is `/usr/local/bin`, but you must ensure that if this
   is and NFS export that it is exported with `NO_ROOT_SQUASH` on the
   machines on which you wish to use the program. (`$DEST`)
 
@@ -34,7 +34,7 @@ Now run the `makesandbox.pl` script:
 
     ./makesandbox.pl
 
-This creates the required directories, copies in the executables and
+This creates the required directories, copies in the system executables and
 any libraries that they use. * See also the Additional Install notes below *
 
 Now source the config file and compile the chrootperl program:
@@ -45,7 +45,7 @@ Now source the config file and compile the chrootperl program:
 Note that you must have sudo permissions to do `chmod` and `chown` and
 will be prompted for your password.
 
-You can then install the program in /usr/local/bin/ by typing
+You can then install the program in `$DEST` by typing
 
     make install
 
@@ -144,6 +144,6 @@ When installing the HTML form demo, you may also override the location
 of the sandbox that is specified in the `chrootperl.cfg` file by
 specifying it on the command line. e.g.
 
-    cd examples/html
+    cd example/html
     ./install.sh $SANDBOX
 

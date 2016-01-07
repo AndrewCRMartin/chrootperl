@@ -1,4 +1,7 @@
 <html>
+<!-- **************************************************************
+       This HTML file is designed to be processed with 'bootify'
+     ************************************************************** -->
 <head>
 <title>Perl interpreter</title>
 <style type='text/css'>
@@ -124,8 +127,10 @@ while(&lt;&gt;)
   semi-colon (<samp>;</samp>) after a command to indicate the end of one
   command and separate if from the next command.</p>
    
+<!-- [callout] -->
 <p>So here is our complete piece of code. Click the 'Run' button to
   see the results.</p>
+<!-- [/callout] -->
 
 <form action='perl.cgi' method='post'>
 <textarea cols='80' rows='5' name='script'>
@@ -253,6 +258,7 @@ print "The total was: $total\n";
 <p>The funny <samp>\n</samp> at the end inserts a return character to
   end the printed line.</p>
 
+<!-- [callout] -->
 <p>Clearly we can exploit all this to count the lines in a file. You now
   know everything you need:</p>
 <ul>
@@ -265,6 +271,7 @@ print "The total was: $total\n";
 </ul>
 
 <p>Give it a go! The answer should be 4253</p>
+<!-- [/callout] -->
 
 <form action='perl.cgi' method='post'>
 <textarea cols='80' rows='10' name='script'>
@@ -388,10 +395,11 @@ print "There were $total lines\n";
 if($columns[2] eq "CA")
 </pre>
 
-
+<!-- [callout] -->
 <p>Your previous code that counted the total number of atoms should
   have looked like what is shown below. Modify it to count the number
   of amino acids. The answer should be 555</p>
+<!-- [/callout] -->
 
 <form action='perl.cgi' method='post'>
 <textarea cols='80' rows='7' name='script'>
@@ -426,15 +434,21 @@ print "There were $total residues\n";
 
 <p>
 You have already seen the <samp>while(){}</samp> loop used to repeat a
-  block of code <i>while</i> something is true (in the cases you have
-  seen, the thing you are testing for truth is whether the file
-  contains something).  Very often we want to do something a specified
-  number of times and we can use the <samp>while(){}</samp> loop for
-  this purpose.  For example, if we wanted to do something 5 times, we
-  could initialize a variable to zero, (e.g. <samp>$count=0;</samp>)
-  start a <samp>while(){}</samp> with the condition that the variable
-  is less than 5 and within the loop we could increment the
-  variable. Give it a try:</p>
+block of code <i>while</i> something is true (in the cases you have
+seen, the thing you are testing for truth is whether the file contains
+something).  Very often we want to do something a specified number of
+times and we can use the <samp>while(){}</samp> loop for this
+purpose.</p>
+
+<!-- [callout] -->
+<p>For example, if we wanted to do something 5 times, we could
+initialize a variable to zero, (e.g. <samp>$count=0;</samp>) start
+a <samp>while(){}</samp> with the condition that the variable is less
+than 5 and within the loop we could increment the variable. Give it a
+try:</p>
+<!-- [/callout] -->
+
+
 <form action='perl.cgi' method='post'>
 <textarea cols='80' rows='7' name='script'>
 $count = 0;
@@ -449,8 +463,13 @@ while($count &lt; 5)
 
 <p>However, this is something that we need to do so often, that Perl
   gives us a simpler syntax known as the <samp>for(){}</samp>
-  loop. This allows us to specify an initialization, a condition and
-  an increment in a single line:</p>
+  loop.</p>
+
+<!-- [callout] -->
+<p>This allows us to specify an initialization, a condition and
+  an increment in a single line. Give it a try:</p>
+<!-- [/callout] -->
+
 <form action='perl.cgi' method='post'>
 <textarea cols='80' rows='5' name='script'>
 for($count = 0; $count < 5; $count++)
@@ -480,8 +499,13 @@ for($count = 0; $count < 5; $count++)
 <p>We could use a <samp>for(){}</samp> loop to print each of the
   values in an array. You just need one other piece of information to
   know how to do that: how to find out how many values are in
-  the array. Perl lets you do that by using the <samp>scalar()</samp>
+  the array.</p>
+
+<!-- [callout] -->
+<p> Perl lets you do that by using the <samp>scalar()</samp>
   function around the array name. Try this piece of code:</p>
+<!-- [/callout] -->
+
 <form action='perl.cgi' method='post'>
 <textarea cols='80' rows='5' name='script'>
 @words = ("Hello", "World");
@@ -491,11 +515,12 @@ print "There were $nWords words\n";
 <input type='submit' value='Run' />
 </form>
 
+<!-- [callout] -->
 <p>Given the information you have about the <samp>for(){}</samp> loop,
   and remembering how you access an individual item in an array,
   modify the above code to print each word in the array on a separate
   line.</p>
-
+<!-- [/callout] -->
 
 <p>Again stepping through the values contained in an array is such a
   common thing, that Perl provides a special loop syntax for doing
@@ -512,11 +537,13 @@ foreach $word (@words)
 <input type='submit' value='Run' />
 </form>
 
+<!-- [callout] -->
 <ul>
 <li>What happens if you take out the <samp>\n</samp>?</li>
 <li>Modify this code so that you also count how many words were stored
   in the array as you step through the loop and print the answer.</li>
 </ul>
+<!-- [/callout] -->
 
 
 <!-- [/page] -->
@@ -589,9 +616,11 @@ foreach $key (keys %myHash)
 }
 </pre>
 
+<!-- [callout] -->
 <p>Here is a little example that takes a piece of text, splits it into
   words (storing these in an array) and then uses those words as keys
   in a hash to count how many times each word occurs.</p>
+<!-- [/callout] -->
 
 <form action='perl.cgi' method='post'>
 <textarea cols='80' rows='20' name='script'>
@@ -654,6 +683,7 @@ One      Two              Three
   the file we will overwrite the value that is stored. All we care
   about is the list of keys.</p>
 
+<!-- [callout] -->
 <p>Go ahead and see if you can write the code. Remember what you
   need:</p>
 <ol>
@@ -672,6 +702,7 @@ One      Two              Three
 
 <p>I've provided an outline with some comments describing the code you
   need to write:</p>
+<!-- [/callout] -->
 
 <form action='perl.cgi' method='post'>
 <textarea cols='80' rows='15' name='script'>
@@ -689,11 +720,13 @@ while(<>)
 <input type='submit' value='Run' />
 </form>
 
+<!-- [callout] -->
 <p>Now modify the code so that you obtain:</p>
 <ul>
 <li>First, the number of atoms in each chain</li>
 <li>Second, the number of residues in each chain</li>
 </ul>
+<!-- [/callout] -->
 
 <!-- [/page] -->
 

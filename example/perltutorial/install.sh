@@ -1,3 +1,21 @@
+#!/bin/bash
+
+# To override the default install directory (DEFDIR below) do:
+#    export DIR=/path/to/my/web/install/directory
+# before running this script.
+#
+# To override the sandbox directory specified in the 
+# ../../chrootperl.cfg file do:
+#    export SANDBOX=/path/to/my/sandbox
+# before running this script.
+#
+# To override the directory containing chrootperl specified 
+# in the ../../chrootperl.cfg file do:
+#    export DEST=/path/to/directory/containing/chrootperl/
+# before running this script.
+#
+
+
 DEFDIR=${HOME}/public_html/chrootperltutorial
 if [ "X$DIR" == "X" ]
 then
@@ -46,7 +64,7 @@ echo " "
 if [ $DIR == $DEFDIR ]
 then
    me=`whoami`
-   echo "You may now access the demo code at http://localhost/~${me}/chrootperltutorial/"
+   echo "You may now access the demo code at the http://localhost/~${me}/chrootperltutorial/"
 else
    echo "You may now access the demo code at the URL equivalent of $DIR"
 fi
