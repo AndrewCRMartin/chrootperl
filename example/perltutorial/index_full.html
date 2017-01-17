@@ -49,7 +49,7 @@ is designed as a powerful scripting language making it easy and fast
   Windows and install Linux instead!) </p>
 
 <p>To write a Perl script, one normally uses a 'text editor' to create
-  the script. A text editor is a program a biut like a word processor,
+  the script. A text editor is a program a bit like a word processor,
   but it doesn't do anything fancy like different fonts, text size,
   colours, etc. It simply allows one to create a plain text
   file. You <emph>could</emph> use Word to do that (and select 'Save
@@ -108,18 +108,18 @@ while(&lt;&gt;)
 }
 </pre>
 
-<p>The <samp>while()</samp> control statment means 'while something
+<p>The <samp>while()</samp> control statement means 'while something
   (contained in the parentheses) is true do whatever is between the
   curly brackets'.</p>
 
 <p>In this case the condition (the thing that has to be true) is
   written as <samp>&lt;&gt;</samp>. This is a bit of Perl shorthand
   magic that says 'read a line from the file specified on the command
-  line'.</p>
+  line, store the result and return FALSE if the file has ended'.</p>
 
 <p>The thing between the curly brackets in this case is introduced
   with a <samp>#</samp> - this introduces a comment. It doesn't do anything at all,
-  but helps explain what your code is doing - it just makes things
+  but allows you to help explain what your code is doing - it just makes things
   more readable.</p>
 
 <p>So if we introduce just one more command, we will have a Perl
@@ -271,7 +271,7 @@ print "The total was: $total\n";
 <li>After the loop has finished, print the number of lines</li>
 </ul>
 
-<p>Give it a go! The answer should be 4253</p>
+<p>Give it a go! The answer should be 4250</p>
 <!-- [/callout] -->
 
 <form action='perl.cgi' method='post'>
