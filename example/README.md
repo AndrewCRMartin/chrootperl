@@ -30,13 +30,21 @@ getservent(), setservent(), endprotoent(), getprotobyname(),
 getprotobynumber(), getprotoent(), setprotoent(), etc.
 
 
-html2
------
+perltutorial
+------------
 
-The `html2` directory builds on this providing a more extensive web
+The `perltutorial` directory builds on this providing a more extensive web
 page designed as a very simple tutorial introduction to the basics of
 Perl programming.
 
-This example is designed to be processed using `makepages` from
-https://github.com/AndrewCRMartin/makepages
+This example is designed to be processed using `bootify` from
+https://github.com/AndrewCRMartin/bootify
+
+killer
+------
+
+This script is designed to be run as root to kill long-running jobs
+that have been created from the above web pages. Errors in people's
+scripts could result in a deliberate or accidental denial of service
+attack.
 
