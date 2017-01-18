@@ -63,11 +63,11 @@ my $user      = (defined($::u))?$::u:'apache';
 #my $user      = 'localuser';
 
 # Executables to kill
-my @jobnames  = ('perl.*/var/tmp.*/tmp/test.pdb'    , 'perl.cgi');
+my @jobnames  = ('perl.*/run/.*/tmp/test.pdb', 'practicals/perl/perl.cgi');
 #my @jobnames  = ('perl.*hello.*sleep', 'perl.cgi');
 
 # Time to allow a job to run
-my $timeLimit = 10;
+my $timeLimit = 5;
 
 #*************************************************************************
 %::jobs = ();
