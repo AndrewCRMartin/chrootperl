@@ -337,7 +337,7 @@ print "There were $total lines\n";
   'slot' in the array). Think of the array as the name of a road of houses -
   you can access the person who lives in a particular house by
   specifying the road name and the house number. The main difference
-  is that, in Perl, arrays indices count from zero rather than
+  is that, in Perl, array indices count from zero rather than
   one.</p>
 
 <p>If, as in this example, our array is called <samp>@columns</samp>
@@ -348,7 +348,7 @@ print "There were $total lines\n";
   in front of the name of the array - using the road of houses
   analogy, this is how we show we are referring to the whole
   road. However, when we refer to an individual 'slot' in the array we
-  use a <samp>$</samp> in front of the name. This is because the the
+  use a <samp>$</samp> in front of the name. This is because the 
   single slot is not an array. In the road of houses analogy, it is a
   single house rather than the whole road. Consequently, it is a
   scalar variable which (as shown previously) starts with
@@ -437,9 +437,9 @@ print "There were $total residues\n";
 You have already seen the <samp>while(){}</samp> loop used to repeat a
 block of code <i>while</i> something is true (in the cases you have
 seen, the thing you are testing for truth is whether the file contains
-something).  Very often we want to do something a specified number of
-times and we can use the <samp>while(){}</samp> loop for this
-purpose.</p>
+something - i.e. we haven't reached the end of the file).  Very often
+we want to do something a specified number of times and we can use
+the <samp>while(){}</samp> loop for this purpose.</p>
 
 <!-- [callout] -->
 <p>For example, if we wanted to do something 5 times, we could
@@ -677,7 +677,7 @@ One      Two              Three
 "Three".</p>
 
 <p>We have seen how we can use hashes, so let's apply them to obtain a
-  list oft he chains present in our PDB file. If we read our PDB file as
+  list of the <i>chains</i> present in our PDB file. If we read our PDB file as
   before and split each line into columns, we can use the chain label (stored
   in <samp>$columns[4]</samp>) as a key into a hash. In this case the
   value we store doesn't matter: each time we read another line from
@@ -724,8 +724,12 @@ while(<>)
 <!-- [callout] -->
 <p>Now modify the code so that you obtain:</p>
 <ul>
-<li>First, the number of atoms in each chain</li>
-<li>Second, the number of residues in each chain</li>
+<li>First, the number of atoms in each chain (rather than storing 1 as
+  the value in the hash, increment the value and print it at the
+  end)</li>
+<li>Second, the number of residues in each chain (the same as counting
+  the atoms, but we check that <samp>$columns[2]</samp>
+  is <samp>CA</samp>)</li>
 </ul>
 <!-- [/callout] -->
 
