@@ -4,12 +4,12 @@
 #   Program:    killer
 #   File:       killer.pl
 #   
-#   Version:    V1.0
-#   Date:       18.01.17
+#   Version:    V1.1
+#   Date:       15.01.19
 #   Function:   Kills long running jobs according to patterns specified
 #               at the top of the code
 #   
-#   Copyright:  (c) Dr. Andrew C. R. Martin, UCL, 2017
+#   Copyright:  (c) Dr. Andrew C. R. Martin, UCL, 2017-2019
 #   Author:     Dr. Andrew C. R. Martin
 #   Address:    Institute of Structural and Molecular Biology
 #               Division of Biosciences
@@ -52,6 +52,7 @@
 #   Revision History:
 #   =================
 #   V1.0   18.01.17   Original
+#   V1.1   15.01.19   Remove leading and trailing spaces from jobs
 #
 #*************************************************************************
 use strict;
@@ -102,6 +103,9 @@ sub _killTheLongOnes
     my @jobs = split(/\n/, $jobData);
     foreach my $job (@jobs)
     {
+        $job =~ s/^\s+//;
+        $job =~ s/\s+$//;
+
         my @fields = split(/\s+/, $job);
         my $jobID = $fields[0];
         if(defined($::jobs{$jobID}))
