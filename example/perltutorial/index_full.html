@@ -133,7 +133,7 @@ while(&lt;&gt;)
   see the results.</p>
 <!-- [/callout] -->
 
-<form action='perl.cgi' method='post'>
+<form action='perl.cgi' method='post' target='perlresults'>
 <textarea cols='80' rows='5' name='script'>
 while(<>)
 {
@@ -274,7 +274,7 @@ print "The total was: $total\n";
 <p>Give it a go! The answer should be 4250</p>
 <!-- [/callout] -->
 
-<form action='perl.cgi' method='post'>
+<form action='perl.cgi' method='post' target='perlresults'>
 <textarea cols='80' rows='10' name='script'>
 </textarea>
 <input type='submit' value='Run' />
@@ -402,7 +402,7 @@ if($columns[2] eq "CA")
   of amino acids. The answer should be 555</p>
 <!-- [/callout] -->
 
-<form action='perl.cgi' method='post'>
+<form action='perl.cgi' method='post' target='perlresults'>
 <textarea cols='80' rows='7' name='script'>
 $total = 0;
 while(<>)
@@ -450,7 +450,7 @@ try:</p>
 <!-- [/callout] -->
 
 
-<form action='perl.cgi' method='post'>
+<form action='perl.cgi' method='post' target='perlresults'>
 <textarea cols='80' rows='7' name='script'>
 $count = 0;
 while($count &lt; 5)
@@ -471,7 +471,7 @@ while($count &lt; 5)
   an increment in a single line. Give it a try:</p>
 <!-- [/callout] -->
 
-<form action='perl.cgi' method='post'>
+<form action='perl.cgi' method='post' target='perlresults'>
 <textarea cols='80' rows='5' name='script'>
 for($count = 0; $count < 5; $count++)
 {
@@ -507,7 +507,7 @@ for($count = 0; $count < 5; $count++)
   function around the array name. Try this piece of code:</p>
 <!-- [/callout] -->
 
-<form action='perl.cgi' method='post'>
+<form action='perl.cgi' method='post' target='perlresults'>
 <textarea cols='80' rows='5' name='script'>
 @words = ("Hello", "World");
 $nWords = scalar(@words);
@@ -527,7 +527,7 @@ print "There were $nWords words\n";
   common thing, that Perl provides a special loop syntax for doing
   it. This is known as the <samp>foreach(){}</samp> loop:</p>
 
-<form action='perl.cgi' method='post'>
+<form action='perl.cgi' method='post' target='perlresults'>
 <textarea cols='80' rows='7' name='script'>
 @words = ("Hello", "World");
 foreach $word (@words)
@@ -557,7 +557,7 @@ foreach $word (@words)
   and is used to store a single value which can be a number or a
   string of characters. For instance:
 </p>
-<form action='perl.cgi' method='post'>
+<form action='perl.cgi' method='post' target='perlresults'>
 <textarea cols='80' rows='5' name='script'>
 $a = 5;
 $b = "Hello world";
@@ -572,7 +572,7 @@ print "'b' says $b\n";
   accessing each one using an index number. Remember that an
   individual slot in the array (as opposed to the whole array) is a
   scalar and is therefore introduced by a <samp>$</samp>. For instance:</p>
-<form action='perl.cgi' method='post'>
+<form action='perl.cgi' method='post' target='perlresults'>
 <textarea cols='80' rows='3' name='script'>
 @values = ("Zero", "One", "Two", "Three");
 print "$values[2]\n";
@@ -623,7 +623,7 @@ foreach $key (keys %myHash)
   in a hash to count how many times each word occurs.</p>
 <!-- [/callout] -->
 
-<form action='perl.cgi' method='post'>
+<form action='perl.cgi' method='post' target='perlresults'>
 <textarea cols='80' rows='20' name='script'>
 # Initialize a string with some text
 $text = "Once upon a time there was a man who had a time machine";
@@ -705,7 +705,7 @@ One      Two              Three
   need to write:</p>
 <!-- [/callout] -->
 
-<form action='perl.cgi' method='post'>
+<form action='perl.cgi' method='post' target='perlresults'>
 <textarea cols='80' rows='15' name='script'>
 while(<>)
 {
